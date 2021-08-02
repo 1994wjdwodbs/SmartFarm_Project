@@ -3,9 +3,9 @@
 XX을 위한 XX Project 입니다.
 
 > __Smart Farm 기능__ <br/>
->> 1. XX<br/>
->> 2. YY<br/>
->> 3. ZZ<br/>
+>> __1. XX__ <br/>
+>> __2. YY__ <br/>
+>> __3. ZZ__ <br/>
 
 ## 진척상황
 
@@ -26,7 +26,8 @@ XX을 위한 XX Project 입니다.
     <span><b>SmartFarm DEMO</b></span>
 </p>
 
-- Flask Demo 파이썬 코드 작성 (정재윤)<br/>
-- CSS, HTML 작성 (하진우)<br/>
+- Flask Demo 파이썬 코드 작성<br/>
+- 실시간 스트리밍 코드 작성<br/>
+- CSS, HTML 작성<br/>
 
 ---

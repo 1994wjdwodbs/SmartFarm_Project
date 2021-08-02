@@ -1,6 +1,20 @@
-# SmartFarm_Project 🌱
+# Smart Farm Project 🌱
+
+XX을 위한 XX Project 입니다.
+
+> __Smart Farm 기능__ <br/>
+>> 1. XX<br/>
+>> 2. YY<br/>
+>> 3. ZZ<br/>
 
 ## 진척상황
+
+### MileStone
+
+<p align="center">
+    <img src="PortFolio/images/smartfarm_milestone.jpg"><br/>
+    <span><b>SmartFarm DEMO</b></span>
+</p>
 
 ---
 

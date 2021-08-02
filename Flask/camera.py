@@ -15,8 +15,9 @@ class Camera(object):
             Camera.thread = threading.Thread(target=self._thread)
             Camera.thread.start()
 
+            # 프레임 생성될 때까지 대기
             while self.frame is None:
-                time.sleep(0)
+                pass
 
     def get_frame(self):
         Camera.last_access = time.time()
@@ -41,6 +42,8 @@ class Camera(object):
 
         stream = io.BytesIO()
         
+        # Capture images continuously from the camera 
+        # as an infinite iterator.
         for foo in cls.camera.capture_continuous(stream, 'jpeg',
                                                 use_video_port=True):
             stream.seek(0)
@@ -49,7 +52,11 @@ class Camera(object):
             stream.seek(0)
             stream.truncate()
 
+            # 반응 없을 경우 탈출
             if time.time() - cls.last_access > 10:
                 break
+
+            # 100ms 딜레이(10fps)
+            time.sleep(0.1)
 
         cls.thread = None

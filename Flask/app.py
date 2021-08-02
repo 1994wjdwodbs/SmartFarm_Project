@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Response, request
 from camera import Camera
-import time
+import time, datetime
 import serial
 import sys
 import signal
@@ -19,7 +19,11 @@ def handler(signal, frame):
 # RealTime 출력을 위한 frame 생성 gen 함수
 def gen(camera):
     while True:
+
         frame = camera.get_frame()
+        # now = datetime.datetime.now()
+        # print(now.strftime('%H:%M:%S RealTime Frame 생성'))
+
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
@@ -75,6 +79,6 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, threaded=True)
     # 시그널 설정
     signal.signal(signal.SIGINT, handler)
+    app.run(host='0.0.0.0', port=8080, threaded=True)

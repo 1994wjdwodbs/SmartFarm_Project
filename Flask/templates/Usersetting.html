@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Sign_up </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+   </head>
+
+          <!-- Designing by CodingLab -->
+
+<body>
+  <div class="Login_div">
+    <div class="title">User<br>Information</div>
+    <hr>
+    <p style="font-size: 20px; margin-bottom: 10px; text-align: center; ;">Change Your Information</p>
+    <img src="{{ url_for('static', filename='images/plant.jpg') }}" alt="plant" style="max-inline-size:-webkit-fill-available;">
+    <form action="Control.html">
+      <div class="input_box">
+        <input type="text" placeholder="Name to change">
+        <div class="icon"><i class="fas fa-user"></i></div>
+      </div>
+      <div class="input_box">
+        <input type="text" placeholder="Email to change" required>
+        <div class="icon"><i class="fas fa-envelope-square"></i></div>
+      </div>
+      <div class="input_box">
+        <input type="password" placeholder="Password to change" required>
+        <div class="icon"><i class="fas fa-lock "></i></div>
+      </div>
+      <div class="input_box">
+        <input type="password" placeholder="Repeat Your Password" required>
+        <div class="icon"><i class="fas fa-lock "></i></div>
+      </div>
+      <div class="sign_up">
+        <a href="/control"><i class="fas fa-user-plus"></i>Change</a>
+      </div>
+    </form>
+  </div>
+  
+</body>
+</html>

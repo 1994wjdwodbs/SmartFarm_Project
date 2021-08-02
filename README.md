@@ -7,8 +7,8 @@
 ### 21.08.02 (월)
 
 <p align="center">
-    <img src="images/210802_smartfarm_demo_01.JPG"><br/>
-    <img src="images/210802_smartfarm_demo_02.JPG"><br/>
+    <img src="Portfolio/images/210802_smartfarm_demo_01.JPG"><br/>
+    <img src="Portfolio/images/210802_smartfarm_demo_02.JPG"><br/>
     <span><b></b></span>
 </p>
 

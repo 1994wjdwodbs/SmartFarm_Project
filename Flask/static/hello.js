@@ -1,5 +1,5 @@
 function sayHello() {
-    alert("Hello world");
+    alert("Hello world~~!");
 }
 
 function ajaxTest() {
@@ -20,7 +20,7 @@ function ajaxTest() {
             alert('Error!');
             return false;
         }
-    });
+    }); 
 }
 
 // 페이지 로드시 자동 실행하는 함수

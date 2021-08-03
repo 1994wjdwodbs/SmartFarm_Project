@@ -1,6 +1,8 @@
 from flask import Flask, render_template, Response, request
+from flask.helpers import make_response
 from camera import Camera
 import time, datetime
+import json
 import serial
 import sys
 import signal
@@ -27,12 +29,27 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+
+# (데코레이터) AJAX 경로 (POST)
+@app.route("/ajax_to_py", methods=['post'])
+def ajax_to_py():
+    print("넘어옴, id : " + request.form['id'])
+    resp = app.response_class(
+        response=json.dumps({"result":"5678"}),
+        status=200,
+        mimetype='application/json'
+    )
+    print(resp)
+    return resp
+# (데코레이터) AJAX 경로
+
 # (데코레이터) '/address' 경로
 @app.route("/")
 def index():
     ip_address = request.remote_addr
     print("<requester IP : " + ip_address + " >")
     print(request.get_data)
+
     # static/dummy.html 렌더링
     return render_template("dummy.html")
  

@@ -1,9 +1,16 @@
 <html>
     <head>
+        <script type="text/javascript"
+            src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}">
+        </script>
         <script type = "text/javascript"
             src = "{{ url_for('static', filename = 'hello.js') }}" ></script>
+        
     </head>
     <body>
-        <input type = "button" onclick = "sayHello()" value = "Say Hello" />
+        <input type = "button" name="buttons" id="btn1" onclick = "sayHello()" value = "Say Hello"/>&nbsp;
+        <label for="btn1">TEST1</label><br/>
+        <input type = "button" name="buttons" id="btn2" onclick = "ajaxTest()" value = "Ajax Test"/>&nbsp;
+        <label for="btn2">TEST2</label><br/>
     </body>
 </html>

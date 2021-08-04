@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, url_for
 from flask.helpers import make_response
 from camera import Camera
 import time, datetime
@@ -6,11 +6,28 @@ import json
 import serial
 import sys
 import signal
+import os
 
 # 웹 서버를 위한 Flask 객체 생성
 app = Flask(__name__)
 # RealTime 출력을 위한 Camera 객체 생성
 camera = Camera()
+
+# js,css 파일 캐싱 문제를 해결하기 위한 Static files versioning 
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(app.root_path,
+                                     endpoint, filename)
+            values['q'] = int(os.stat(file_path).st_mtime)
+    return url_for(endpoint, **values)
+
+# 컨텍스트 프로세서들은 새로운 Value들을 
+# 템플릿 컨텍스트에 주입시키기 위해 템플릿이 렌더링되기 전에 실행
+@app.context_processor
+def override_url_for(): # url_for 오버라이딩
+    return dict(url_for=dated_url_for)
 
 # Ctrl+C 핸들러 (카메라 리소스 해제)
 def handler(signal, frame):

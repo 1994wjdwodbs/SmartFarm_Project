@@ -57,8 +57,8 @@ XX을 위한 XX Project 입니다.
 - LED 센서 확인 및 데모 코드 (단계별 조절) 작성<br/>
 
 <p align="center">
-    <img src="PortFolio/images/ajax_led.jpg"><br/>
-    <span><b>LED 센서</b></span>
+    <img src="PortFolio/images/ajax_sensor.jpg"><br/>
+    <span><b>센서 버튼 동작 확인</b></span>
 </p>
 
 - Ajax 코드 (웹 컨트롤러 버튼 동작) 작성<br/>

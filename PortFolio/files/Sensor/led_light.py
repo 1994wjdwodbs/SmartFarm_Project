@@ -14,7 +14,7 @@ try :
     # GPIO.output(ledPin, True)
     while duty < 100:
         duty += 1
-        p.ChangeDutyCycle(duty)
+        p.ChangeDutyCycle(duty)  
         print("duty : " + str(duty))
         time.sleep(0.1)
     p.stop()

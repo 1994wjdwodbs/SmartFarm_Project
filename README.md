@@ -36,7 +36,7 @@ XX을 위한 XX Project 입니다.
 
 <p align="center">
     <img src="PortFolio/images/waterpump.jpg"><br/>
-    <img src="PortFolio/images/photoresistor.jpg"><br/>
+    <img src="PortFolio/images/mcp3008_and_light.jpg"><br/>
     <span><b>워터펌프, 조도센서</b></span>
 </p>
 

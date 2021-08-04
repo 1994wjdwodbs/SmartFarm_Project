@@ -34,13 +34,14 @@ XX을 위한 XX Project 입니다.
 
 ### 21.08.03 (화)
 
+- Ajax 데모 코드 작성<br/>
+
 <p align="center">
     <img src="PortFolio/images/waterpump.jpg"><br/>
     <img src="PortFolio/images/mcp3008_and_light.jpg"><br/>
     <span><b>워터펌프, 조도센서</b></span>
 </p>
 
-- Ajax 데모 코드 작성<br/>
 - 워터 펌프 가동 확인 및 데모 코드 (릴레이 모듈 제어) 작성<br/>
 - 조도 센서 확인 및 데모 코드 (밝기별 전압) 작성<br/>
 
@@ -54,6 +55,12 @@ XX을 위한 XX Project 입니다.
 </p>
 
 - LED 센서 확인 및 데모 코드 (단계별 조절) 작성<br/>
+
+<p align="center">
+    <img src="PortFolio/images/ajax_led.jpg"><br/>
+    <span><b>LED 센서</b></span>
+</p>
+
 - Ajax 코드 (웹 컨트롤러 버튼 동작) 작성<br/>
 - js, css 파일 캐싱 문제 해결<br/>
 

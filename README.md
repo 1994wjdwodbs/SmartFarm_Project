@@ -34,8 +34,25 @@ XX을 위한 XX Project 입니다.
 
 ### 21.08.03 (화)
 
+<p align="center">
+    <img src="PortFolio/images/waterpump.jpg"><br/>
+    <img src="PortFolio/images/photoresistor.jpg"><br/>
+    <span><b>워터펌프, 조도센서</b></span>
+</p>
+
 - Ajax 데모 코드 작성<br/>
 - 워터 펌프 가동 확인 및 코드 작성<br/>
 - 조도 센서 확인 및 코드 작성<br/>
+
+---
+
+### 21.08.04 (수)
+
+<p align="center">
+    <img src="PortFolio/images/led_sensor.jpg"><br/>
+    <span><b>LED 센서</b></span>
+</p>
+
+- LED 센서 확인<br/>
 
 ---

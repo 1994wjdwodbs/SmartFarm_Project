@@ -9,6 +9,8 @@
     <script type="text/javascript"
             src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}">
         </script>
+    <script type = "text/javascript"
+    src = "{{ url_for('static', filename = 'test.js') }}" ></script>
    </head>
           <!-- Designing by CodingLab -->
 
@@ -33,12 +35,13 @@
               <img src="{{ url_for('static', filename='images/온도.png') }}" alt="" height="50px" style="margin-right: 30px;">
               <p>현재온도 : 22℃</p>
               <p>LED</p>
-              <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
+              <input type="checkbox" id="switch1" name="switch1"  class="input__on-off">
               <label for="switch1" class="label__on-off">
                 <span class="marble"></span>
-                <span class="on">on</span>
-                <span class="off">off</span>
+                <span class="on" >on</span>
+                <span class="off" >off</span>
               </label>
+              
             </div>
             <div class="mid">
               <img src="{{ url_for('static', filename='images/습도.png') }}" alt="" height="50px" style="margin-right: 30px;">
@@ -50,6 +53,7 @@
                 <span class="on">on</span>
                 <span class="off">off</span>
               </label>
+              
             </div>
             <div class="mid">
               <img src="{{ url_for('static', filename='images/조도.png') }}" alt="" height="50px" style="margin-right: 30px;">

@@ -41,6 +41,17 @@ def ajax_to_py():
     )
     print(resp)
     return resp
+
+@app.route("/Choco", methods=['post'])
+def Choco():
+    print("넘어옴, Name : " + request.form['Name'])
+    resp = app.response_class(
+        response=json.dumps({"result":"Hancom"}),
+        status=200,
+        mimetype='application/json'
+    )
+    print(resp)
+    return resp
 # (데코레이터) AJAX 경로
 
 # (데코레이터) '/address' 경로
@@ -95,7 +106,9 @@ def video_feed():
     return Response(gen(camera),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+
 if __name__ == "__main__":
     # 시그널 설정
     signal.signal(signal.SIGINT, handler)
     app.run(host='0.0.0.0', port=8080, threaded=True)
+

@@ -49,7 +49,7 @@ XX을 위한 XX Project 입니다.
 ### 21.08.04 (수)
 
 <p align="center">
-    <img src="PortFolio/images/led_sensor.jpg"><br/>
+    <img src="PortFolio/images/led_light.jpg"><br/>
     <span><b>LED 센서</b></span>
 </p>
 

@@ -69,7 +69,7 @@ def Choco():
     )
     print(resp)
     return resp
-# (데코레이터) AJAX 경로
+# (데코레이터) AJAX 경로 
 
 # (데코레이터) '/address' 경로
 @app.route("/")

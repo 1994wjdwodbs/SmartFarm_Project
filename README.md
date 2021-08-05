@@ -68,5 +68,10 @@ XX을 위한 XX Project 입니다.
 
 ### 21.08.05 (목)
 
+<p align="center">
+    <img src="PortFolio/images/sensor_lcd.jpg"><br/>
+    <span><b>온습도 센서 및 결과 LCD 출력</b></span>
+</p>
+
 - 온습도 센서 및 I2C LCD 모듈 확인 및 데모 코드 (온습도 표기) 작성<br/>
 - 라즈베리파이 GPIO 핀 배치도 구성<br/>

@@ -90,8 +90,11 @@
 
             <!-- LED 게이지 -->
             <p>LED</p>
-            <Input class="range" type="range" name "LED" value="0" min="0" max="100" 
-            onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)">
+            
+            <div class="range-slider" style="margin-top: 40px;">
+              <input class="input-range" type="range" value="1" min="0" max="100"> 
+              <span class="range-value">1</span>
+            </div>
 
             <!-- Fan1 버튼 -->
             <div class="Fan1">

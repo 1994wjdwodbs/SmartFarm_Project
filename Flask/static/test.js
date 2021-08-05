@@ -119,4 +119,8 @@ $(document).ready(function() {
             },
         });
     });
+   //  LED Range 함수
+    $('.input-range').on('input', function () {
+      $(this).next('.range-value').html(this.value);
+  });
 });

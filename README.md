@@ -79,16 +79,23 @@ XX을 위한 XX Project 입니다.
 
 ### 21.08.06 (금)
 
+<p align="center">
+    <img src="PortFolio/images/dc_adapter_5v.jpg.jpg"><br/>
+    <span><b>DC 5V 전원 공급 장치 튜닝</b></span>
+</p>
+
 - DC 5V 전원 공급 어댑터 튜닝<br/>
 
-// 수위 센서, 토양 수분 센서 모두 MCP3008 모듈이 있어야 아날로그 값을 읽어들일 수 있다... 
+<p align="center">
+    <img src="PortFolio/images/water_level_and_soil_moisture.jpg"><br/>
+    <span><b>수위 측정 센서 및 토양 수분 센서</b></span>
+</p>
+
 - 수위 센서 확인 및 데모 코드 (전위차) 작성<br/>
 - 토양 수분 센서 확인 및 데모 코드 (전위차) 작성<br/>
 
 - 라즈베리파이 GPIO 핀 배치도 구성<br/>
 
-// 필요 없는 UI 부분 삭제
-- CSS 구성 변경<br/>
 
 #### Issue
 > MCP3008 모듈 고장, 다음 주 수요일까지 배송 예정<br/>
@@ -98,4 +105,6 @@ XX을 위한 XX Project 입니다.
 
 ### 21.08.10 (월)
 
-// 일정 : Raspberry Pi 핀 / Bread Board 배치
+> __일정__ <br/>
+> Raspberry Pi 핀 / Bread Board 배치<br/>
+> 필요 없는 UI 부분 삭제 및 변경, 토양 수분 측정 버튼 추가<br/>

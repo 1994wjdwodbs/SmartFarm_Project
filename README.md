@@ -74,12 +74,46 @@ XX을 위한 XX Project 입니다.
 </p>
 
 - 온습도 센서 및 I2C LCD 모듈 확인 및 데모 코드 (온습도 표기) 작성<br/>
-- 라즈베리파이 GPIO 핀 배치도 구성<br/>
 
 ---
 
-### 21.08.05 (금)
+### 21.08.06 (금)
 
-// 수위 센서, 토양 수분 센서 모두 MCP3008 모듈이 있어야 아날로그 값을 읽어들일 수 있다... 
-- 수위 센서 확인 및 데모 코드<br/>
-- 토양 수분 센서 확인 및 데모 코드<br/>
+<p align="center">
+    <img src="PortFolio/images/dc_adapter_5v.jpg"><br/>
+    <span><b>DC 5V 전원 공급 장치 튜닝</b></span>
+</p>
+
+- DC 5V 전원 공급 어댑터 튜닝<br/>
+
+<p align="center">
+    <img src="PortFolio/images/water_level_and_soil_moisture.jpg"><br/>
+    <span><b>수위 측정 센서 및 토양 수분 센서</b></span>
+</p>
+
+- 수위 센서 확인 및 데모 코드 (전위차) 작성<br/>
+- 토양 수분 센서 확인 및 데모 코드 (전위차) 작성<br/>
+
+<p align="center">
+    <img src="PortFolio/images/배치도_1.png"><br/>
+    <span><b>라즈베리파이 핀 배치도</b></span>
+    <img src="PortFolio/images/배치도_2.png"><br/>
+    <span><b>브레드 보드 #1 배치도</b></span>
+    <img src="PortFolio/images/배치도_3.png"><br/>
+    <span><b>브레드 보드 #2 배치도</b></span>
+</p>
+
+- 라즈베리파이 GPIO 핀 배치도 구성<br/>
+
+
+#### Issue
+> MCP3008 모듈 고장, 다음 주 수요일까지 배송 예정<br/>
+> 센서 측정 값 비일관적, 해결 방법 모색<br/>
+
+---
+
+### 21.08.10 (월)
+
+> __일정__ <br/>
+> Raspberry Pi 핀 / Bread Board 배치<br/>
+> 필요 없는 UI 부분 삭제 및 변경, 토양 수분 측정 버튼 추가<br/>

@@ -94,6 +94,15 @@ XX을 위한 XX Project 입니다.
 - 수위 센서 확인 및 데모 코드 (전위차) 작성<br/>
 - 토양 수분 센서 확인 및 데모 코드 (전위차) 작성<br/>
 
+<p align="center">
+    <img src="PortFolio/images/배치도_1.png"><br/>
+    <span><b>라즈베리파이 핀 배치도</b></span>
+    <img src="PortFolio/images/배치도_2.png"><br/>
+    <span><b>브레드 보드 #1 배치도</b></span>
+    <img src="PortFolio/images/배치도_3.png"><br/>
+    <span><b>브레드 보드 #2 배치도</b></span>
+</p>
+
 - 라즈베리파이 GPIO 핀 배치도 구성<br/>
 
 

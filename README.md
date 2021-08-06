@@ -80,7 +80,7 @@ XX을 위한 XX Project 입니다.
 ### 21.08.06 (금)
 
 <p align="center">
-    <img src="PortFolio/images/dc_adapter_5v.jpg.jpg"><br/>
+    <img src="PortFolio/images/dc_adapter_5v.jpg"><br/>
     <span><b>DC 5V 전원 공급 장치 튜닝</b></span>
 </p>
 

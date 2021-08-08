@@ -69,9 +69,21 @@
             <div class="mid">
               <img src="{{ url_for('static', filename='images/토양습도.png') }}" alt="" height="50px" style="margin-right: 30px;">
               <p>토양습도 : 20%</p>
-              <p>Pump</p>
+              <p>moisture</p>
               <input type="checkbox" id="switch4" name="switch4" class="input__on-off">
               <label for="switch4" class="label__on-off">
+                <span class="marble"></span>
+                <span class="on">on</span>
+                <span class="off">off</span>
+              </label>
+            </div>
+            <div class="mid">
+              <img src="{{ url_for('static', filename='images/펌프.png') }}" alt="" height="50px" style="margin-right: 30px;">
+              <div><a href="https://smashicons.com/" ></a></div>
+              <p>펌프</p>
+              <p>Pump</p>
+              <input type="checkbox" id="switch5" name="switch5" class="input__on-off">
+              <label for="switch5" class="label__on-off">
                 <span class="marble"></span>
                 <span class="on">on</span>
                 <span class="off">off</span>
@@ -91,43 +103,12 @@
             <!-- LED 게이지 -->
             <p>LED</p>
             
-            <div class="range-slider" style="margin-top: 40px;">
+            <div class="range-slider" style="margin-top: 40px; text-align: center;">
               <input class="input-range" type="range" value="1" min="0" max="100"> 
               <span class="range-value">1</span>
             </div>
-
-            <!-- Fan1 버튼 -->
-            <div class="Fan1">
-              <p >Fan1</p>
-            </div>
-            <input type="checkbox" id="switch5" name="switch5" class="input__on-off">
-            <label for="switch5" class="label__on-off">
-              <span class="marble"></span>
-              <span class="on">on</span>
-              <span class="off">off</span>
-            </label>
-
-            <!-- Fan2 버튼 -->
-            <div class="Fan2">
-              <p>Fan2</p>
-            </div>
-              <input type="checkbox" id="switch6" name="switch6" class="input__on-off">
-              <label for="switch6" class="label__on-off">
-                <span class="marble"></span>
-                <span class="on">on</span>
-                <span class="off">off</span>
-              </label>
-
           </div>
-          <div class="mid Pump">
-            <p>Pump</p>
-            <input type="checkbox" id="switch7" name="switch7" class="input__on-off">
-            <label for="switch7" class="label__on-off">
-              <span class="marble"></span>
-              <span class="on">on</span>
-              <span class="off">off</span>
-            </label>
-          </div>
+          
         </div>
         <!-- Settings 끝-->
       </form>

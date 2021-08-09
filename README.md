@@ -57,7 +57,7 @@ XX을 위한 XX Project 입니다.
 - LED 센서 확인 및 데모 코드 (단계별 조절) 작성<br/>
 
 <p align="center">
-    <img src="PortFolio/images/ajax_sensor.jpg" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/ajax_sensor.jpg" ><br/>
     <span><b>센서 버튼 동작 확인</b></span>
 </p>
 
@@ -69,7 +69,7 @@ XX을 위한 XX Project 입니다.
 ### 21.08.05 (목)
 
 <p align="center">
-    <img src="PortFolio/images/sensor_lcd.jpg" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/sensor_lcd.jpg" ><br/>
     <span><b>온습도 센서 및 결과 LCD 출력</b></span>
 </p>
 
@@ -80,14 +80,14 @@ XX을 위한 XX Project 입니다.
 ### 21.08.06 (금)
 
 <p align="center">
-    <img src="PortFolio/images/dc_adapter_5v.jpg" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/dc_adapter_5v.jpg" ><br/>
     <span><b>DC 5V 전원 공급 장치 튜닝</b></span>
 </p>
 
 - DC 5V 전원 공급 어댑터 튜닝<br/>
 
 <p align="center">
-    <img src="PortFolio/images/water_level_and_soil_moisture.jpg" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/water_level_and_soil_moisture.jpg" ><br/>
     <span><b>수위 측정 센서 및 토양 수분 센서</b></span>
 </p>
 
@@ -95,11 +95,11 @@ XX을 위한 XX Project 입니다.
 - 토양 수분 센서 확인 및 데모 코드 (전위차) 작성<br/>
 
 <p align="center">
-    <img src="PortFolio/images/배치도_1.png" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/배치도_1.png" ><br/>
     <span><b>라즈베리파이 핀 배치도</b></span>
-    <img src="PortFolio/images/배치도_2.png" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/배치도_2.png" ><br/>
     <span><b>브레드 보드 #1 배치도</b></span>
-    <img src="PortFolio/images/배치도_3.png" width="70%" height="50%"><br/>
+    <img width="70%" height="50%" src="PortFolio/images/배치도_3.png" ><br/>
     <span><b>브레드 보드 #2 배치도</b></span>
 </p>
 

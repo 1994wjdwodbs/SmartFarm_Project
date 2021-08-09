@@ -68,23 +68,6 @@ $(document).ready(function() {
             },
         });
     });
-    $('#switch5').change(function() {
-        $.ajax({
-          type:'POST',
-          dataType:'JSON',
-          url:'Choco',
-          data:{"Name" : "coco"},
-          success : function(data) {
-             if ($("#switch5").is(":checked")){
-                alert("On")
-             }
-             else
-             {
-                alert("Off")
-             }
-            },
-        });
-    });
    //  LED Range 함수
     $('.input-range').on('input', function () {
       $(this).next('.range-value').html(this.value);

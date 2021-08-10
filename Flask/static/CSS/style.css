@@ -78,6 +78,7 @@ html,body{
 .main_div .total{
   float: right; 
   margin-top: 40px;
+  display: flex;
 }
 
 .total .mid p{
@@ -201,12 +202,13 @@ html {
   box-sizing: inherit;
   margin:0;
   padding:0;
+  margin-bottom: 10px;
 }
 .mid {
-  display: flex;
+  display: inline-grid;
   align-items: center;
   justify-content: center;
-  padding-top:1em;
+  margin:10px;
 }
 
 /* Settings 스타일 */
@@ -215,8 +217,9 @@ html {
 }
 
 .Settings .mid{
-  justify-content: flex-start; 
-  margin-left: 100px;
+  justify-content: center; 
+  margin-right: 100px;
+  display: flex;
 }
 
 .Settings p{
@@ -324,40 +327,6 @@ input::-moz-focus-inner {
   border: 0;
 }
 /* ///range 스타일 */
-
-.Settings .Fan1{
-  margin-left: 300px;
-}
-
-.Settings .mid .Fan1 p{
-  margin-left: 50px;
-  margin-right: 50px;
-  font-weight: bolder;
-  font-size: 30px;
-}
-
-.Settings .mid .Fan2{
-  margin-left: 100px;
-}
-
-.Settings .mid .Fan2 p{
-  margin-right: 30px; 
-  font-weight: bolder; 
-  font-size: 30px;
-}
-
-.Settings .mid .Pump{
-  justify-content: flex-start;
-  margin-left: 100px;
-}
-
-.Settings .mid .Pump p{
-  margin-right: 30px;
-  font-weight: bolder;
-  font-size: 30px;
-}
-
-
 
 /* 토글 버튼 스타일*/
 input[type="checkbox"] { display: none; } 

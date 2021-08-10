@@ -1,11 +1,16 @@
 # Smart Farm Project 🌱
 
-XX을 위한 XX Project 입니다.
+실내, 홈 가드닝을 위한 Smart Farm Project 입니다.
 
 > __Smart Farm 기능__ <br/>
->> __1. XX__ <br/>
->> __2. YY__ <br/>
->> __3. ZZ__ <br/>
+>> __1. 조도에 따른 LED센서 ON/OFF                        __ <br/>
+>> __2. LED센서 밝기 단계별 조절 기능(UI)                 __ <br/>
+>> __3. 현재 대기 온도에 따른 FAN ON/OFF                  __ <br/>
+>> __4. 토양 습도 값에 따른 Water Pump ON/OFF             __ <br/>
+>> __5. 온습도 센서 측정 값 Smart Farm Kit LCD에 출력     __ <br/>
+>> __6. 수위 센서를 통한 수통 잔여 물 양 확인(UI)         __ <br/>
+>> __7. 카메라 모듈로 실시간 식물 상태 확인 기능(UI)      __ <br/>
+>> __8. FAN, LED, Water Pump, 토양 습도 센서 수동 조작(UI)__ <br/>
 
 ## 진척상황
 

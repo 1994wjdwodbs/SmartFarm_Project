@@ -105,7 +105,7 @@ XX을 위한 XX Project 입니다.
 </p> 
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/배치도_3.png" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/배치도_4.png" ><br/>
     <span><b>브레드 보드 #2 배치도</b></span>
 </p> 
     

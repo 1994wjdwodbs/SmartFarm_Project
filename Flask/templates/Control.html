@@ -1,41 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <title> ControlPage </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script type="text/javascript"
-            src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}">
-        </script>
-    <script type = "text/javascript"
-    src = "{{ url_for('static', filename = 'test.js') }}" ></script>
-   </head>
-          <!-- Designing by CodingLab -->
 
-          <!-- 디스플레이 시작 -->
+<head>
+  <meta charset="UTF-8" >
+  <title> ControlPage </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}">
+  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename = 'test.js') }}"></script>
+</head>
+<!-- Designing by CodingLab -->
+
+<!-- 디스플레이 시작 -->
+
 <body>
   <div class="main_div">
-      <div class="button" >
-          <!-- <a href="Usersetting.html" style="background-color: white; 
-          color: green; text-decoration: underline;">회원설정</a> -->
-          <a href="/login">Logout</a>
-      </div>
+    <div class="button">
+      <a onClick="window.location.reload()" style="cursor: pointer;">
+        <i style="font-size:24px; margin: 10px 15px 0 0 ;" class="fa">&#xf021;</i>
+      </a>
+      <a href="/login">Logout</a>
+    </div>
     <br>
     <div>
       <div class="ControlPage">Display</div>
       <form action="">
         <div>
           <!-- 식물 사진 -->
-          <img src="{{ url_for('video_feed') }}" height="340" alt="plant" style="padding-top: 30px; padding-left: 100px;">
+          <img src="{{ url_for('video_feed') }}" height="340" alt="plant"
+            style="padding-top: 30px; padding-left: 100px;">
           <!-- 온도, 습도 , 조도, 토양습도  버튼 시작-->
           <div class="total">
             <div class="mid">
-              <img src="/static/images/%EC%98%A8%EB%8F%84.png?q=1628036352" alt="" height="50px" style="margin-right: 30px;">
-              <img src="/static/images/%EC%8A%B5%EB%8F%84.png?q=1628036352" alt="" height="50px" style="margin-right: 30px;">
-              <img src="/static/images/%EC%A1%B0%EB%8F%84.png?q=1628036352" alt="" height="50px" style="margin-right: 30px;">
-              <img src="/static/images/%ED%8E%8C%ED%94%84.png?q=1628405926" alt="" height="50px" style="margin-right: 30px;">
+              <img src="/static/images/%EC%98%A8%EB%8F%84.png?q=1628036352" alt="" height="50px"
+                style="margin-right: 30px;">
+              <img src="/static/images/%EC%8A%B5%EB%8F%84.png?q=1628036352" alt="" height="50px"
+                style="margin-right: 30px;">
+              <img src="/static/images/%EC%A1%B0%EB%8F%84.png?q=1628036352" alt="" height="50px"
+                style="margin-right: 30px;">
+              <img src="/static/images/%ED%8E%8C%ED%94%84.png?q=1628405926" alt="" height="50px"
+                style="margin-right: 30px;">
             </div>
             <div class="mid">
               <p>현재온도 : 22℃</p>
@@ -47,7 +53,7 @@
               <p>조명</p>
               <p>환풍기1</p>
               <p>환풍기2</p>
-              <p>펌프</p>  
+              <p>펌프</p>
             </div>
             <div class="mid">
               <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
@@ -55,13 +61,13 @@
                 <span class="marble"></span>
                 <span class="on">on</span>
                 <span class="off">off</span>
-              </label>  
+              </label>
               <input type="checkbox" id="switch2" name="switch2" class="input__on-off">
               <label for="switch2" class="label__on-off">
                 <span class="marble"></span>
                 <span class="on">on</span>
                 <span class="off">off</span>
-              </label>  
+              </label>
               <input type="checkbox" id="switch3" name="switch3" class="input__on-off">
               <label for="switch3" class="label__on-off">
                 <span class="marble"></span>
@@ -81,7 +87,7 @@
           <!-- 온도, 습도 , 조도, 토양습도  버튼 끝-->
         </div>
       </form>
-        <!-- 디스플레이 끝 -->
+      <!-- 디스플레이 끝 -->
       <form>
         <!-- Settings 시작-->
         <div class="Settings">
@@ -90,17 +96,18 @@
 
             <!-- LED 게이지 -->
             <p>LED</p>
-            
+
             <div class="range-slider" style="margin-top: 40px; text-align: center;">
-              <input class="input-range" type="range" value="1" min="0" max="100"> 
+              <input class="input-range" type="range" value="1" min="0" max="100">
               <span class="range-value">1</span>
             </div>
           </div>
-          
+
         </div>
         <!-- Settings 끝-->
       </form>
     </div>
   </div>
 </body>
+
 </html>

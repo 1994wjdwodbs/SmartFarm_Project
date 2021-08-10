@@ -141,4 +141,5 @@
 
 > __일정__ <br/>
 > - 배치도에 따른 동작 확인<br/>
+> - Smart Farm Database 및 SQL 작성<br/>
 > - UI 부분 리프레시 버튼 추가<br/>

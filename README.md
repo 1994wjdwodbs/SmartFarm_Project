@@ -3,14 +3,14 @@
 실내, 홈 가드닝을 위한 Smart Farm Project 입니다.
 
 > __Smart Farm 기능__ <br/>
->> 1. 조도에 따른 LED센서 ON/OFF                        __ <br/>
->> 2. LED센서 밝기 단계별 조절 기능(UI)                 __ <br/>
->> 3. 현재 대기 온도에 따른 FAN ON/OFF                  __ <br/>
->> 4. 토양 습도 값에 따른 Water Pump ON/OFF             __ <br/>
->> 5. 온습도 센서 측정 값 Smart Farm Kit LCD에 출력     __ <br/>
->> 6. 수위 센서를 통한 수통 잔여 물 양 확인(UI)         __ <br/>
->> 7. 카메라 모듈로 실시간 식물 상태 확인 기능(UI)      __ <br/>
->> 8. FAN, LED, Water Pump, 토양 습도 센서 수동 조작(UI)__ <br/>
+>> 1. 조도에 따른 LED센서 ON/OFF <br/>
+>> 2. LED센서 밝기 단계별 조절 기능(UI) <br/>
+>> 3. 현재 대기 온도에 따른 FAN ON/OFF <br/>
+>> 4. 토양 습도 값에 따른 Water Pump ON/OFF <br/>
+>> 5. 온습도 센서 측정 값 Smart Farm Kit LCD에 출력 <br/>
+>> 6. 수위 센서를 통한 수통 잔여 물 양 확인(UI) <br/>
+>> 7. 카메라 모듈로 실시간 식물 상태 확인 기능(UI) <br/>
+>> 8. FAN, LED, Water Pump, 토양 습도 센서 수동 조작(UI) <br/>
 
 ## 진척상황
 

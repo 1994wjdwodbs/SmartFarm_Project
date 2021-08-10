@@ -126,7 +126,7 @@ XX을 위한 XX Project 입니다.
 
 > __일정__ <br/>
 > Raspberry Pi 핀 / Bread Board 배치<br/>
-> 필요 없는 UI 부분 삭제 및 변경, 토양 수분 측정 버튼 추가<br/>
+> UI 부분(FAN 버튼 우측 상단과 하단측 중복, 토양 수분 측정 ON/OFF 버튼 추가-ON상태 유지일 시 고장) 삭제, 생성 및 변경<br/>
 
 ---
 

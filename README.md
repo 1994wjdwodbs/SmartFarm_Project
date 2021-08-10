@@ -110,7 +110,7 @@
 </p> 
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/배치도_4.png" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/배치도_3.png" ><br/>
     <span><b>브레드 보드 #2 배치도</b></span>
 </p> 
     

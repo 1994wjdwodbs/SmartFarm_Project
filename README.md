@@ -135,7 +135,7 @@ __- 조희지__ <br/>
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/임시_배치도.jpg" ><br/>
-    <span><b>임시 핀 배치</b></span>
+    <span><b>임시 핀 배치</b></span><br/>
     <img width="60%" height="60%" src="PortFolio/images/모듈_임시_고정.jpg" ><br/>
     <span><b>모듈 일부 고정</b></span>
 </p> 

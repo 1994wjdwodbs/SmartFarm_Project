@@ -163,7 +163,7 @@ __- 조희지__ <br/>
 - 배치도에 따른 동작 확인<br/>
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/smart_farm_db.jpg><br/>
+    <img width="60%" height="60%" src="PortFolio/images/smart_farm_db.jpg"><br/>
     <span><b>Smart Farm Database & SQL</b></span>
 </p> 
 

@@ -113,11 +113,7 @@
     <img width="60%" height="60%" src="PortFolio/images/배치도_3.png" ><br/>
     <span><b>브레드 보드 #2 배치도</b></span>
 </p> 
-    
-    
-    
-
-
+   
 - 라즈베리파이 GPIO 핀 배치도 구성<br/>
 
 
@@ -129,10 +125,22 @@
 
 ### 21.08.09 (월)
 
-- Raspberry Pi 핀 / Bread Board 배치, Smart Farm 모듈 일부 고정<br/>
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/임시_배치도.jpg" ><br/>
+    <span><b>임시 핀 배치</b></span>
+</p> 
+
+- Raspberry Pi 핀 / Bread Board 임시 배치, Smart Farm 모듈 일부 고정<br/>
+
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/UI_변경_210809.jpg" ><br/>
+    <span><b>임시 핀 배치</b></span>
+</p> 
+
 - UI 부분 삭제, 생성 및 변경<br/>
 > 1. FAN 버튼 우측 상단과 하단측 중복<br/>
 > 2. 토양 수분 측정 ON/OFF 버튼 추가<br/>
+> 3. UI 부분 리프레시 버튼 추가<br/>
 
 ---
 
@@ -146,7 +154,6 @@
 - 배치도에 따른 동작 확인<br/>
 
 - Smart Farm Database 및 SQL 작성<br/>
-- UI 부분 리프레시 버튼 추가<br/>
 
 ---
 

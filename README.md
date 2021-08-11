@@ -164,10 +164,10 @@ __- 조희지__ <br/>
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/smart_farm_db.jpg"><br/>
-    <span><b>Smart Farm Database & SQL</b></span>
+    <span><b>Smart Farm Database & Init SQL</b></span>
 </p> 
 
-- Smart Farm Database 및 SQL 작성<br/>
+- Smart Farm Database 및 테이블 작성/초기화 SQL 작성<br/>
 
 ---
 

@@ -129,17 +129,33 @@
 
 ### 21.08.09 (월)
 
-> __일정__ <br/>
-> - Raspberry Pi 핀 / Bread Board 배치<br/>
-> - UI 부분 삭제, 생성 및 변경<br/>
->> 1. FAN 버튼 우측 상단과 하단측 중복<br/>
->> 2. 토양 수분 측정 ON/OFF 버튼 추가-ON상태 유지일 시 고장<br/>
+- Raspberry Pi 핀 / Bread Board 배치, Smart Farm 모듈 일부 고정<br/>
+- UI 부분 삭제, 생성 및 변경<br/>
+> 1. FAN 버튼 우측 상단과 하단측 중복<br/>
+> 2. 토양 수분 측정 ON/OFF 버튼 추가<br/>
 
 ---
 
 ### 21.08.10 (화)
 
-> __일정__ <br/>
-> - 배치도에 따른 동작 확인<br/>
-> - Smart Farm Database 및 SQL 작성<br/>
-> - UI 부분 리프레시 버튼 추가<br/>
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/릴레이_작동.webp" ><br/>
+    <span><b>릴레이 센서 동작 확인</b></span>
+</p> 
+
+- 배치도에 따른 동작 확인<br/>
+
+- Smart Farm Database 및 SQL 작성<br/>
+- UI 부분 리프레시 버튼 추가<br/>
+
+---
+
+### 21.08.11 (수)
+
+- 웹 UI 위젯 클릭 시 센서 제어 기능 확인<br/>
+
+---
+
+### 21.08.12 (목)
+
+- 배선 작업<br/>

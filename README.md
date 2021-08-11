@@ -134,9 +134,9 @@ __- 조희지__ <br/>
 ### 21.08.09 (월)
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/임시_배치도.jpg" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/임시_배치_.jpg" ><br/>
     <span><b>임시 핀 배치</b></span><br/>
-    <img width="60%" height="60%" src="PortFolio/images/모듈_임시_고정.jpg" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/모듈_임시_고정_.jpg" ><br/>
     <span><b>모듈 일부 고정</b></span>
 </p> 
 

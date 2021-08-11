@@ -12,6 +12,14 @@
 >> 7. 카메라 모듈로 실시간 식물 상태 확인 기능(UI) <br/>
 >> 8. FAN, LED, Water Pump, 토양 습도 센서 수동 조작(UI) <br/>
 
+## Smart Farm Project Members (5명)
+
+__- 강동훈__ <br/>
+__- 정재윤__ <br/>
+__- 하진우__ <br/>
+__- 허상현__ <br/>
+__- 조희지__ <br/>
+
 ## 진척상황
 
 ### MileStone
@@ -66,7 +74,7 @@
     <span><b>센서 버튼 동작 확인</b></span>
 </p>
 
-- Ajax 코드 (웹 컨트롤러 버튼 동작) 작성<br/>
+- Ajax 코드 (웹 컨트롤러 버튼 동작), JS 코드 작성<br/>
 - js, css 파일 캐싱 문제 해결<br/>
 
 ---
@@ -128,19 +136,20 @@
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/임시_배치도.jpg" ><br/>
     <span><b>임시 핀 배치</b></span>
+    <img width="60%" height="60%" src="PortFolio/images/모듈_임시_고정.jpg" ><br/>
+    <span><b>모듈 일부 고정</b></span>
 </p> 
 
 - Raspberry Pi 핀 / Bread Board 임시 배치, Smart Farm 모듈 일부 고정<br/>
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/UI_변경_210809.jpg" ><br/>
-    <span><b>임시 핀 배치</b></span>
+    <span><b>UI 일부 수정</b></span>
 </p> 
 
 - UI 부분 삭제, 생성 및 변경<br/>
 > 1. FAN 버튼 우측 상단과 하단측 중복<br/>
-> 2. 토양 수분 측정 ON/OFF 버튼 추가<br/>
-> 3. UI 부분 리프레시 버튼 추가<br/>
+> 2. UI 부분 리프레시 버튼 추가<br/>
 
 ---
 
@@ -153,13 +162,20 @@
 
 - 배치도에 따른 동작 확인<br/>
 
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/smart_farm_db.jpg><br/>
+    <span><b>Smart Farm Database & SQL</b></span>
+</p> 
+
 - Smart Farm Database 및 SQL 작성<br/>
 
 ---
 
 ### 21.08.11 (수)
 
-- 웹 UI 위젯 클릭 시 센서 제어 기능 확인<br/>
+- UI 재배치 및 버튼(토양 수분 센서 측정) 추가<br/>
+- GPIO 코드 (웹 UI 위젯 클릭 시 센서 제어 기능, 주기적인 측정), JS 코드 작성<br/>
+
 
 ---
 

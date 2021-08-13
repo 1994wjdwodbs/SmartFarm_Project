@@ -11,6 +11,11 @@ html,body{
   height: 100vh;
   place-items:center;
 }
+.Whole{
+  display: -webkit-box;
+  margin-left: 100px;
+}
+
 .main_div{
   width: 1300px;
   background: #fff;
@@ -76,9 +81,10 @@ html,body{
 }
 
 .main_div .total{
+  display: flex;
+
   float: right; 
   margin-top: 40px;
-  display: flex;
 }
 
 .total .mid p{
@@ -211,6 +217,10 @@ html {
   margin:10px;
 }
 
+.measure{
+  margin-bottom: 4.8px;
+}
+
 /* Settings 스타일 */
 .Settings .ControlPage{
   text-align: center; 
@@ -229,10 +239,13 @@ html {
 }
 
 /* range 스타일 */
+.range-slider{
+  text-align: center;
+}
 
 .range-slider .input-range {
   -webkit-appearance: none;
-  width: 100%;
+  width: 70%;
   height: 10px;
   border-radius: 5px;
   background: #ccc;
@@ -273,8 +286,7 @@ html {
 .range-value {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 40px;
+  width: 40px;
   color: #fff;
   font-size: 16px;
   line-height: 20px;
@@ -334,7 +346,6 @@ input[type="checkbox"] { display: none; }
   overflow: hidden; 
   position: relative; 
   display: inline-block;
-  margin-left: 10px;
   width: 58px; height: 26px; 
   -webkit-border-radius: 13px; 
   -moz-border-radius: 13px; 
@@ -391,8 +402,7 @@ input[type="checkbox"] { display: none; }
 .input__on-off:checked + .label__on-off .marble {
   left: 33px; }
 
-/* 회원가입창 */
-
+/* LED */
 
 
 

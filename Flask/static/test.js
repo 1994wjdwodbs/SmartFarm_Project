@@ -67,12 +67,27 @@ $(document).ready(function() {
            }
           },
       });
-  });
+    });
     $(function (){ $("#pressMe").one("click", function(){
         alert("측정 시작"); 
       }); 
-   });
-
+    });
+    // Refresh 함수
+    $("#refresh_sf").click(function(){
+      $.ajax({
+         type:'POST',
+         dataType:'JSON',
+         url:'getAllProperty',
+         data:{"id" : "All"},
+         success : function(data) {
+            console.log(data);
+         },
+         error : function(e) {
+            alert('Error!');
+            return false;
+         }
+       });
+    });
    //  LED Range 함수
     $('.input-range').on('input', function () {
       $(this).next('.range-value').html(this.value);

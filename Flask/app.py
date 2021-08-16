@@ -8,6 +8,23 @@ import sys
 import signal
 import os
 
+# SF_machine database 제어용 py
+import sf_db
+# SF_machine 기계 제어용 py
+import sf_sensor
+
+# SF_machine 변수(GLOBAL)
+idx = 0
+LED = 0
+w_level = 0
+l_level = 0
+s_level = 0
+pump = False
+fan_in = False
+fan_out = False
+temp = 0.0
+humi = 0.0
+
 # 웹 서버를 위한 Flask 객체 생성
 app = Flask(__name__)
 # RealTime 출력을 위한 Camera 객체 생성
@@ -22,6 +39,14 @@ def dated_url_for(endpoint, **values):
                                      endpoint, filename)
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
+
+# SF_machine Update Property
+def SF_machine_UpdateProperty():
+    # SF_machinie에서 모든 Value를 가져옴
+
+    # GLOBAL 변수 갱신
+
+    # Smart Farm 기계 Value 갱신
 
 # 컨텍스트 프로세서들은 새로운 Value들을 
 # 템플릿 컨텍스트에 주입시키기 위해 템플릿이 렌더링되기 전에 실행
@@ -70,6 +95,19 @@ def Choco():
     print(resp)
     return resp
 # (데코레이터) AJAX 경로 
+
+# (데코레이터) '/getAllProperty'
+@app.route("/getAllProperty", methods=['post'])
+def get_AllProperty():
+    print("getAllProperty 요청, id : " + request.form['id'])
+    rec = sf_db.getAllProperty()
+    resp = app.response_class(
+        response=json.dumps({"idx" : rec[0], "LED" : rec[1], "w_level" : rec[2], "l_level" : rec[3], "s_level" : rec[4], "pump" : rec[5], "fan_in" : rec[6], "fan_out" : rec[7], "temp" : rec[8], "humi" : rec[9]}),
+        status=200,
+        mimetype='application/json'
+    )
+    print(resp)
+    return resp
 
 # (데코레이터) '/address' 경로
 @app.route("/")

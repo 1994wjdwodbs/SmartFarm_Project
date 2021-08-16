@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 def Init():
     pass
 
-# GPIO 종료 (Clean)
+# GPIO 종료 (Clean) ##
 def Close():
     pass
 

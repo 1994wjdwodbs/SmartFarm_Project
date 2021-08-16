@@ -185,17 +185,31 @@ __- 조희지__ <br/>
 
 ### 21.08.12 (목)
 
-
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/Smart_Farm_모듈_센서_배치_완료.jpg" ><br/>
     <span><b>Smart Farm 모듈 및 센서 배치 완료</b></span>
 </p> 
 
-- Smart Farm 전체 모듈 고정 & 배선 작업<br/>
+- Smart Farm 전체 모듈 고정 & 일부 배선 작업<br/>
 
 ---
 
 ### 21.08.13 (금)
+
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_1.jpg" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_2.jpg" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" ><br/>
+    <span><b>Smart Farm 모듈 및 센서 최종 배치 완료</b></span>
+</p> 
+
+- Smart Farm 최종 배치 작업<br/>
+
+---
+
+### 이후 일정
+
+// 각자 알아서 UI 개선 및 작동 연결만 해주면 됨!!
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/UI_개선.webp" ><br/>

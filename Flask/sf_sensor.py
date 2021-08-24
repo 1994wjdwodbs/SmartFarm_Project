@@ -17,14 +17,17 @@ class Sensors:
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
 
+        # GPIO 세팅
         GPIO.setup(PUMP_PIN, GPIO.OUT)
-
         GPIO.setup(FAN_IN_PIN, GPIO.OUT)
         GPIO.setup(FAN_OUT_PIN, GPIO.OUT)
+        GPIO.setup(SOIL_HUMI_PIN, GPIO.OUT)
 
+        # 릴레이값 초기화
         GPIO.output(PUMP_PIN, GPIO.HIGH)
         GPIO.output(FAN_IN_PIN, GPIO.HIGH)
         GPIO.output(FAN_OUT_PIN, GPIO.HIGH)
+        GPIO.output(SOIL_HUMI_PIN, GPIO.HIGH)
 
         GPIO.setup(LED_PIN, GPIO.OUT)
         self.pwm = GPIO.PWM(LED_PIN, 100)
@@ -56,7 +59,7 @@ class Sensors:
 
     def close(self):
         self.pwm.stop()
-
+        self.display.lcd_clear()
         GPIO.cleanup()
 
 def SetPump(arg_val):

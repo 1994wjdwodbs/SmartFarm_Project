@@ -12,7 +12,7 @@ GPIO.cleanup()
 display = drivers.Lcd()
 
 # read data using pin 21
-instance = dht11.DHT11(pin = 21)
+instance = dht11.DHT11(pin = 24)
 try:
 	while True:
 		result = instance.read()

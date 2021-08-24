@@ -1,5 +1,8 @@
+
+
 // 페이지 로드시 자동 실행하는 함수
 $(document).ready(function() {
+   // 조명
     $('#switch1').change(function() {
         $.ajax({
           type:'POST',
@@ -17,6 +20,7 @@ $(document).ready(function() {
             },
         });
     });
+    // 환풍기 1
     $('#switch2').change(function() {
         $.ajax({
           type:'POST',
@@ -34,6 +38,7 @@ $(document).ready(function() {
             },
         });
     });
+    // 환풍기 2
     $('#switch3').change(function() {
         $.ajax({
           type:'POST',
@@ -51,6 +56,7 @@ $(document).ready(function() {
             },
         });
     });
+    // 펌프
     $('#switch4').change(function() {
       $.ajax({
         type:'POST',
@@ -81,6 +87,9 @@ $(document).ready(function() {
          data:{"id" : "All"},
          success : function(data) {
             console.log(data);
+            $('#switch2').prop('checked', parseInt(data["fan_in"]));
+            $('#switch3').prop('checked',parseInt(data["fan_out"]));
+            $('#switch4').prop('checked',parseInt(data["pump"]));
          },
          error : function(e) {
             alert('Error!');

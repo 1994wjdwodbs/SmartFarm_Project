@@ -15,15 +15,15 @@ import sf_sensor
 
 # SF_machine 변수(GLOBAL)
 idx = 0
-LED = 0
-w_level = 0
-l_level = 0
-s_level = 0
+LED = 0 # 0 ~ 100
+w_level = 0 # 0 ~ 1024
+l_level = 0 # 0 ~ 1024
+s_level = 0 # 0 ~ 1024
 pump = False
 fan_in = False
 fan_out = False
-temp = 0.0
-humi = 0.0
+temp = 0.0 # 0.0 C (온도)
+humi = 0.0 # 0.0 % (습도)
 
 # 웹 서버를 위한 Flask 객체 생성
 app = Flask(__name__)
@@ -47,6 +47,7 @@ def SF_machine_UpdateProperty():
     # GLOBAL 변수 갱신
 
     # Smart Farm 기계 Value 갱신
+    pass
 
 # 컨텍스트 프로세서들은 새로운 Value들을 
 # 템플릿 컨텍스트에 주입시키기 위해 템플릿이 렌더링되기 전에 실행
@@ -98,16 +99,44 @@ def Choco():
 
 # (데코레이터) '/getAllProperty'
 @app.route("/getAllProperty", methods=['post'])
-def get_AllProperty():
+def get_AllProperty(): 
+    global idx
+    global LED 
+    global w_level 
+    global l_level 
+    global s_level 
+    global pump 
+    global fan_in 
+    global fan_out 
+    global temp 
+    global humi 
+
     print("getAllProperty 요청, id : " + request.form['id'])
     rec = sf_db.getAllProperty()
+
+    idx = rec[0]
+    LED = rec[1]
+    w_level = rec[2]
+    l_level = rec[3]
+    s_level = rec[4]
+    pump = rec[5]
+    fan_in = rec[6]
+    fan_out = rec[7]
+    temp = rec[8]
+    humi = rec[9]
+
     resp = app.response_class(
-        response=json.dumps({"idx" : rec[0], "LED" : rec[1], "w_level" : rec[2], "l_level" : rec[3], "s_level" : rec[4], "pump" : rec[5], "fan_in" : rec[6], "fan_out" : rec[7], "temp" : rec[8], "humi" : rec[9]}),
+        response=json.dumps({"idx" : idx, "LED" : LED, "w_level" : w_level, "l_level" : l_level, "s_level" : s_level, "pump" : pump, "fan_in" : fan_in, "fan_out" : fan_out, "temp" : temp, "humi" : humi}),
         status=200,
         mimetype='application/json'
     )
     print(resp)
     return resp
+
+# (데코레이터) '/setProperty'
+@app.route("/setProperty", methods=['post'])
+def setProperty(): 
+    pass
 
 # (데코레이터) '/address' 경로
 @app.route("/")

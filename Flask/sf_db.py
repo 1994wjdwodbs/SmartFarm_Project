@@ -52,6 +52,7 @@ def getAllProperty():
 
     return rec
 
+# 각 센서별 value 조회
 def getProperty(par_name):
 
     #Connect DB File
@@ -63,6 +64,7 @@ def getProperty(par_name):
 
     curs.close()
 
+# 각 센서별 value set
 def SetProperty(par_name, par_val):
 
     #Connect DB File

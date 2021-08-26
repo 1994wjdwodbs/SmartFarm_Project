@@ -25,6 +25,12 @@ fan_out = False
 temp = 0.0 # 0.0 C (온도)
 humi = 0.0 # 0.0 % (습도)
 
+# Thread용 변수(GLOBAL)
+temp_humi_flag = True
+
+# sf_sensor 클래스 인스턴스 객체 생성
+sf_machine = sf_sensor.Sensors()
+
 # 웹 서버를 위한 Flask 객체 생성
 app = Flask(__name__)
 # RealTime 출력을 위한 Camera 객체 생성
@@ -39,15 +45,6 @@ def dated_url_for(endpoint, **values):
                                      endpoint, filename)
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
-
-# SF_machine Update Property
-def SF_machine_UpdateProperty():
-    # SF_machinie에서 모든 Value를 가져옴
-
-    # GLOBAL 변수 갱신
-
-    # Smart Farm 기계 Value 갱신
-    pass
 
 # 컨텍스트 프로세서들은 새로운 Value들을 
 # 템플릿 컨텍스트에 주입시키기 위해 템플릿이 렌더링되기 전에 실행
@@ -112,7 +109,7 @@ def get_AllProperty():
     global humi 
 
     print("getAllProperty 요청, id : " + request.form['id'])
-    rec = sf_db.getAllProperty()
+    rec = sf_db.GetAllProperty()
 
     idx = rec[0]
     LED = rec[1]
@@ -136,7 +133,29 @@ def get_AllProperty():
 # (데코레이터) '/setProperty'
 @app.route("/setProperty", methods=['post'])
 def setProperty(): 
-    pass
+    global sf_machine
+
+    COMMAND = request.form['COMMAND']
+    
+    if COMMAND == 'FAN_IN':
+        if request.form['TURN'] == 'ON':
+            sf_machine.SetFanIn(True)
+            sf_db.SetProperty('fan_in', True)
+            resp = app.response_class(
+                response=json.dumps({"FAN_IN":"ON"}),
+                status=200,
+                mimetype='application/json')
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
+        else:
+            sf_machine.SetFanIn(False)
+            sf_db.SetProperty('fan_in', False)
+            resp = app.response_class(
+                response=json.dumps({"FAN_IN":"ON"}),
+                status=200,
+                mimetype='application/json')
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
 
 # (데코레이터) '/address' 경로
 @app.route("/")

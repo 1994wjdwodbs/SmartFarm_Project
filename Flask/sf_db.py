@@ -1,5 +1,16 @@
 import sqlite3
 
+# idx INTEGER  PRIMARY KEY AUTOINCREMENT,
+# LED INT DEFAULT 0,
+# w_level INT DEFAULT 0,
+# l_level INT DEFAULT 0,
+# s_level INT DEFAULT 0,
+# pump BOOL DEFAULT false,
+# fan_in BOOL DEFAULT false,
+# fan_out BOOL DEFAULT FALSE,
+# temp FLOAT DEFAULT 0,
+# humi FLOAT DEFAULT 0
+
 # smart_farm db 생성 및 SF_machine 초기 Rec 생성
 def db_init():
     SQL_File_Name = 'Create_Tbl_Schema.sql'
@@ -31,7 +42,7 @@ def db_init():
     # Close DB
     curs.close()
 
-def getAllProperty():
+def GetAllProperty():
 
     #Connect DB File
     conn = sqlite3.connect('smart_farm.db')
@@ -53,16 +64,18 @@ def getAllProperty():
     return rec
 
 # 각 센서별 value 조회
-def getProperty(par_name):
+def GetProperty(par_name):
 
     #Connect DB File
     conn = sqlite3.connect('smart_farm.db')
     curs = conn.cursor()
 
     curs.execute('SELECT ' + str(par_name) + ' FROM `SF_machine`')
-    print(curs.fetchone()[0])
+    return_val = curs.fetchone()[0]
 
     curs.close()
+
+    return return_val
 
 # 각 센서별 value set
 def SetProperty(par_name, par_val):
@@ -77,6 +90,6 @@ def SetProperty(par_name, par_val):
     conn.commit()
     curs.close()
 
-SetProperty('LED', 75)
-getAllProperty()
-getProperty('LED')
+# SetProperty('LED', 75)
+# GetAllProperty()
+# GetProperty('LED')

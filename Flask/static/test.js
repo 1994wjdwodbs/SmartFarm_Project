@@ -1,42 +1,37 @@
-
+// 센서별 ajax 요청 함수
+function Turn_Fan_In(arg_val) {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'setProperty',
+      data:{"COMMAND" : "FAN_IN", "TURN" : arg_val},
+      success : function(data) {
+         console.log("Fan-In : " + data)
+        },
+      error : function(e) {
+         alert('Fan-In Error!');
+         return false;
+      }
+    });
+}
 
 // 페이지 로드시 자동 실행하는 함수
 $(document).ready(function() {
-   // 조명
+    // SetInterval (주기적 값 갱신용)
+
+    // 조명
     $('#switch1').change(function() {
-        $.ajax({
-          type:'POST',
-          dataType:'JSON',
-          url:'Choco',
-          data:{"Name" : "coco"},
-          success : function(data) {
-             if ($("#switch1").is(":checked")){
-                alert("On")
-             }
-             else
-             {
-                alert("Off")
-             }
-            },
-        });
+        // Dummy
     });
     // 환풍기 1
     $('#switch2').change(function() {
-        $.ajax({
-          type:'POST',
-          dataType:'JSON',
-          url:'Choco',
-          data:{"Name" : "coco"},
-          success : function(data) {
-             if ($("#switch2").is(":checked")){
-                alert("On")
-             }
-             else
-             {
-                alert("Off")
-             }
-            },
-        });
+      if ($("#switch2").is(":checked")){
+         Turn_Fan_In("ON");
+      }
+      else
+      {
+         Turn_Fan_In("OFF");
+      }
     });
     // 환풍기 2
     $('#switch3').change(function() {

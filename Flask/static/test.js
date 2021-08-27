@@ -14,15 +14,56 @@ function Turn_Fan_In(arg_val) {
       }
     });
 }
+function Turn_Fan_Out(arg_val) {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'setProperty',
+      data:{"COMMAND" : "FAN_OUT", "TURN" : arg_val},
+      success : function(data) {
+         console.log("Fan-Out : " + data)
+        },
+      error : function(e) {
+         alert('Fan-Out Error!');
+         return false;
+      }
+    });
+}
+function Turn_Pump(arg_val) {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'setProperty',
+      data:{"COMMAND" : "PUMP", "TURN" : arg_val},
+      success : function(data) {
+         console.log("Pump : " + data)
+        },
+      error : function(e) {
+         alert('Pump Error!');
+         return false;
+      }
+    });
+}
+function Set_Led(arg_val) {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'setProperty',
+      data:{"COMMAND" : "LED", "LED" : arg_val},
+      success : function(data) {
+         console.log("Led : " + data)
+        },
+      error : function(e) {
+         alert('Led Error!');
+         return false;
+      }
+    });
+}
 
 // 페이지 로드시 자동 실행하는 함수
 $(document).ready(function() {
     // SetInterval (주기적 값 갱신용)
 
-    // 조명
-    $('#switch1').change(function() {
-        // Dummy
-    });
     // 환풍기 1
     $('#switch2').change(function() {
       if ($("#switch2").is(":checked")){
@@ -35,44 +76,26 @@ $(document).ready(function() {
     });
     // 환풍기 2
     $('#switch3').change(function() {
-        $.ajax({
-          type:'POST',
-          dataType:'JSON',
-          url:'Choco',
-          data:{"Name" : "coco"},
-          success : function(data) {
-             if ($("#switch3").is(":checked")){
-                alert("On")
-             }
-             else
-             {
-                alert("Off")
-             }
-            },
-        });
+      if ($("#switch3").is(":checked")){
+         Turn_Fan_Out("ON");
+      }
+      else
+      {
+         Turn_Fan_Out("OFF");
+      }
     });
+
     // 펌프
     $('#switch4').change(function() {
-      $.ajax({
-        type:'POST',
-        dataType:'JSON',
-        url:'Choco',
-        data:{"Name" : "coco"},
-        success : function(data) {
-           if ($("#switch4").is(":checked")){
-              alert("On")
-           }
-           else
-           {
-              alert("Off")
-           }
-          },
-      });
+      if ($("#switch4").is(":checked")){
+         Turn_Pump("ON");
+      }
+      else
+      {
+         Turn_Pump("OFF");
+      }
     });
-    $(function (){ $("#pressMe").one("click", function(){
-        alert("측정 시작"); 
-      }); 
-    });
+
     // Refresh 함수
     $("#refresh_sf").click(function(){
       $.ajax({
@@ -85,6 +108,9 @@ $(document).ready(function() {
             $('#switch2').prop('checked', parseInt(data["fan_in"]));
             $('#switch3').prop('checked',parseInt(data["fan_out"]));
             $('#switch4').prop('checked',parseInt(data["pump"]));
+
+            $('.range-value').html(parseInt(data["LED"]));
+            $('.input-range').val(parseInt(data["LED"]));
          },
          error : function(e) {
             alert('Error!');
@@ -92,8 +118,10 @@ $(document).ready(function() {
          }
        });
     });
+    
    //  LED Range 함수
     $('.input-range').on('input', function () {
       $(this).next('.range-value').html(this.value);
-  });
+      Set_Led(this.value);
+    });
 });

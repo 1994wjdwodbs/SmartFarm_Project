@@ -1,3 +1,4 @@
+import threading
 from flask import Flask, render_template, Response, request, url_for
 from flask.helpers import make_response
 from camera import Camera
@@ -27,6 +28,7 @@ humi = 0.0 # 0.0 % (습도)
 
 # Thread용 변수(GLOBAL)
 temp_humi_flag = True
+check_level_flag = True
 
 # sf_sensor 클래스 인스턴스 객체 생성
 sf_machine = sf_sensor.Sensors()
@@ -56,6 +58,7 @@ def override_url_for(): # url_for 오버라이딩
 def handler(signal, frame):
     print('CTRL-C pressed!')
     camera.close_cam()
+    sf_machine.close()
     sys.exit(0)
 
 # RealTime 출력을 위한 frame 생성 gen 함수
@@ -138,6 +141,7 @@ def setProperty():
     COMMAND = request.form['COMMAND']
     
     if COMMAND == 'FAN_IN':
+        print("FAN_IN")
         if request.form['TURN'] == 'ON':
             sf_machine.SetFanIn(True)
             sf_db.SetProperty('fan_in', True)
@@ -156,6 +160,60 @@ def setProperty():
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             return resp
+
+    if COMMAND == 'FAN_OUT':
+        print("FAN_OUT")
+        if request.form['TURN'] == 'ON':
+            sf_machine.SetFanOut(True)
+            sf_db.SetProperty('fan_out', True)
+            resp = app.response_class(
+                response=json.dumps({"FAN_OUT":"ON"}),
+                status=200,
+                mimetype='application/json')
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
+        else:
+            sf_machine.SetFanOut(False)
+            sf_db.SetProperty('fan_out', False)
+            resp = app.response_class(
+                response=json.dumps({"FAN_OUT":"ON"}),
+                status=200,
+                mimetype='application/json')
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
+
+    if COMMAND == 'PUMP':
+        print("PUMP")
+        if request.form['TURN'] == 'ON':
+            sf_machine.SetPump(True)
+            sf_db.SetProperty('pump', True)
+            resp = app.response_class(
+                response=json.dumps({"PUMP":"ON"}),
+                status=200,
+                mimetype='application/json')
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
+        else:
+            sf_machine.SetPump(False)
+            sf_db.SetProperty('pump', False)
+            resp = app.response_class(
+                response=json.dumps({"PUMP":"ON"}),
+                status=200,
+                mimetype='application/json')
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            return resp
+
+    if COMMAND == 'LED':
+        print("LED")
+        
+        sf_machine.SetLedLight(int(request.form['LED']))
+        sf_db.SetProperty('led', int(request.form['LED']))
+        resp = app.response_class(
+            response=json.dumps({"LED":request.form['LED']}),
+            status=200,
+            mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
 
 # (데코레이터) '/address' 경로
 @app.route("/")
@@ -213,5 +271,9 @@ def video_feed():
 if __name__ == "__main__":
     # 시그널 설정
     signal.signal(signal.SIGINT, handler)
+    check_level_t = threading.Thread(target=sf_machine.CheckLevel, args=(3,))
+    check_level_t.start()
+    temp_humi_t = threading.Thread(target=sf_machine.CheckTempHumi, args=(3,))
+    temp_humi_t.start()
     app.run(host='0.0.0.0', port=8080, threaded=True)
 

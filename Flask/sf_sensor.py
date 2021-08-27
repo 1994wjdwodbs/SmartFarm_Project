@@ -21,6 +21,8 @@ SOIL_HUMI_PIN = 25
 # Thread용 변수(GLOBAL)
 temp_humi_flag = True
 check_level_flag = True
+# Pump, LCD 전원 간섭 방지용
+During_Pump = False
 
 class Sensors:
     def __init__(self):
@@ -72,9 +74,12 @@ class Sensors:
 
     # Set Pump
     def SetPump(self, arg_val):
+        global During_Pump
         if arg_val: # True
+            During_Pump = True
             GPIO.output(PUMP_PIN, GPIO.LOW)
         else: # False
+            During_Pump = False
             GPIO.output(PUMP_PIN, GPIO.HIGH)
 
     # Set LED LIGHT
@@ -82,14 +87,16 @@ class Sensors:
         self.pwm.ChangeDutyCycle(arg_val)
 
     # 온/습도 센서 체크 + DB값 갱신 + LCD 출력
-    def CheckTempHumi(self):
+    def CheckTempHumi(self, sec):
         global temp_humi_flag
+        global During_Pump
+
         instance = dht11.DHT11(TEMP_HUMI_PIN)
 
         while temp_humi_flag:
             result = instance.read()
-            time.sleep(5)
-            
+            time.sleep(0.3)
+
             if result.is_valid():
                 sf_db.SetProperty("temp", result.temperature)
                 sf_db.SetProperty("humi", result.humidity)
@@ -97,10 +104,18 @@ class Sensors:
                 print("Temp : %-3.1f C" % result.temperature)
                 print("Hum  : %-3.1f %%" % result.humidity)
                 # 전압이 부족하거나 전선이 빠져있을 경우 I/O ERROR 일어남
-                self.display.lcd_display_string("Temp : %-3.1f C" % result.temperature, 1)
-                self.display.lcd_display_string("Hum  : %-3.1f %%" % result.humidity, 2)
+                # 특히 펌프가 켜져있을 경우!!
+                if not During_Pump:
+                    print("[LCD 화면 출력]")
+                    self.display.lcd_display_string("Temp : %-3.1f C" % result.temperature, 1)
+                    self.display.lcd_display_string("Hum  : %-3.1f %%" % result.humidity, 2)
             else:
                 print("Error: %d" % result.error_code)
+
+            start = time.time()
+            while (time.time() - start <= sec) and (temp_humi_flag):
+                pass
+
 
     # 토양 센서 측정용 전원
     def SetSoil(self, arg_val):
@@ -110,29 +125,62 @@ class Sensors:
             GPIO.output(SOIL_HUMI_PIN, GPIO.HIGH)
             
     # 아날로그 센서 체크
-    def CheckLevel(self):
+    def CheckLevel(self, sec):
         global check_level_flag
 
         while check_level_flag:
             for ch in range(0, 3):
+                # 0 : 수위 센서
+                # 1 : 조도 센서
+                # 2 : 토양 수분 센서
+                
+                if ch == 2:
+                    GPIO.output(SOIL_HUMI_PIN, GPIO.LOW)
+                    time.sleep(0.5)
+                
                 r = self.spi.xfer2([1, (8 + ch) << 4, 0])
                 reading = ((r[1]&3) << 8) + r[2]
+
+                if ch == 0:
+                    sf_db.SetProperty("w_level", reading)
+                elif ch == 1:
+                    sf_db.SetProperty("l_level", reading)
+                else: # ch == 2
+                    sf_db.SetProperty("s_level", reading)
+
                 voltage = reading * 3.3 / 1024
                 print("Readed data[%d] : %d\t Voltage %f V" % (ch, reading, voltage))
-            time.sleep(1)
+
+                if ch == 2:
+                    GPIO.output(SOIL_HUMI_PIN, GPIO.HIGH)
+
+            start = time.time()
+            while (time.time() - start <= sec) and (check_level_flag):
+                pass
 
     def close(self):
+        global temp_humi_flag
+        global check_level_flag
+
         self.pwm.stop()
         self.display.lcd_clear()
+
+        temp_humi_flag = False
+        check_level_flag = False
+
+        for i in range(0, 10):
+            print(str(10 - i) + '초 뒤에 종료됩니다...')
+            time.sleep(1)
+
         GPIO.cleanup()
-        print("GPIO CLEANUP!")
+        print("[GPIO CLEANUP]")
 
 # 센서 동작 체크
 # x = Sensors()
 # x.SetLedLight(0)
-# temp_humi_t = threading.Thread(target=x.CheckTempHumi)
+# temp_humi_t = threading.Thread(target=x.CheckTempHumi, args=(3,))
 # temp_humi_t.start()
-# check_level_t = threading.Thread(target=x.CheckLevel)
+# check_level_t = threading.Thread(target=x.CheckLevel, args=(1,))
 # check_level_t.start()
 # x.SetFanIn(True)
 # x.SetPump(True)
@@ -144,7 +192,8 @@ class Sensors:
 # x.SetSoil(False)
 # print(sf_db.GetAllProperty())
 # x.SetLedLight(70)
-# time.sleep(5)
+# time.sleep(15)
 # temp_humi_flag = False
 # check_level_flag = False
+# time.sleep(1)
 # x.close()

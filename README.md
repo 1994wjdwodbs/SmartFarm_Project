@@ -174,11 +174,11 @@ __- 조희지__ <br/>
 ### 21.08.11 (수)
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/UI_개선.webp" ><br/>
-    <span><b>Smart Farm UI 일부 변경</b></span>
+    <img width="60%" height="60%" src="PortFolio/images/ui개편.webp" ><br/>
+    <span><b>Smart Farm UI 최종 변경</b></span>
 </p> 
 
-- UI 재배치 및 버튼(토양 수분 센서 측정) 추가<br/>
+- UI 재배치 및 필요 없는 버튼 삭제<br/>
 - GPIO 코드 (웹 UI 위젯 클릭 시 센서 제어 및 주기적인 측정 & DB 기록), Ajax 코드, JS 코드 (웹 UI) 작성<br/>
 
 ---

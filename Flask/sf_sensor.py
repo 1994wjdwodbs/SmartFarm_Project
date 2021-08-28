@@ -106,9 +106,9 @@ class Sensors:
                 # 전압이 부족하거나 전선이 빠져있을 경우 I/O ERROR 일어남
                 # 특히 펌프가 켜져있을 경우!!
                 if not During_Pump:
-                    print("[LCD 화면 출력]")
+                    print(f'[LCD 화면 출력] Temp : {result.temperature:3.1f} C , Humi : {result.humidity:3.1f} %')
                     self.display.lcd_display_string("Temp : %-3.1f C" % result.temperature, 1)
-                    self.display.lcd_display_string("Hum  : %-3.1f %%" % result.humidity, 2)
+                    self.display.lcd_display_string("Humi : %-3.1f %%" % result.humidity, 2)
             else:
                 print("Error: %d" % result.error_code)
 

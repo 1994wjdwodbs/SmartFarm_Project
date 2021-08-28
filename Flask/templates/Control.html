@@ -26,9 +26,9 @@
     </div>
     <div class="button">
       <a style="cursor: pointer;" id="PowerOff"> 
-        <i style="font-size:24px; margin: 10px 13px 0 0 ;" class="fas fa-power-off"></i>
+        <i style="font-size:24px; margin: 10px 13px 0 0 ;" class="fas fa-power-off">&nbsp;</i>
       </a>
-      <a href="/shutdown">PowerOff</a>
+      <a href='javascript:void(0);' onclick="SF_ShutDown();">PowerOff</a>
     </div>
     <br>
     <div>
@@ -59,14 +59,14 @@
                 </div>
                 <!-- 측정값 및 Led -->
                 <div class="mid" style="margin-bottom:-15px;">
-                  <p>현재온도 : 22℃</p>
-                  <p>현재습도 : 60%</p>
-                  <p>현재조도 : 20lx</p>
-                  <p>토양습도 : 20%</p>
+                  <p id="p_temp">현재온도 : 11.1℃</p>
+                  <p id="p_humi">현재습도 : 60%<br/>토양습도&nbsp;:&nbsp;20%</p>
+                  <p id="p_lux">현재조도 : 20lx</p>
+                  <p id="p_water"><br/>현재수위 : 15%</p>
                   <div class="Led">
                     <div class="range-slider" >
                       <input class="input-range" type="range" value="1" min="0" max="100">
-                      <span class="range-value">1</span>
+                      <span class="range-value">0</span>
                     </div>
                   </div>
                 </div>

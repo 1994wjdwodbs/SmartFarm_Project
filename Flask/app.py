@@ -15,20 +15,21 @@ import sf_db
 import sf_sensor
 
 # SF_machine 변수(GLOBAL)
-idx = 0
-LED = 0 # 0 ~ 100
-w_level = 0 # 0 ~ 1024
-l_level = 0 # 0 ~ 1024
-s_level = 0 # 0 ~ 1024
-pump = False
-fan_in = False
-fan_out = False
-temp = 0.0 # 0.0 C (온도)
-humi = 0.0 # 0.0 % (습도)
+# idx = 0
+# LED = 0 # 0 ~ 100
+# w_level = 0 # 0 ~ 1024
+# l_level = 0 # 0 ~ 1024
+# s_level = 0 # 0 ~ 1024
+# pump = False
+# fan_in = False
+# fan_out = False
+# temp = 0.0 # 0.0 C (온도)
+# humi = 0.0 # 0.0 % (습도)
 
 # Thread용 변수(GLOBAL)
 temp_humi_flag = True
 check_level_flag = True
+shutdown_flag = False
 
 # sf_sensor 클래스 인스턴스 객체 생성
 sf_machine = sf_sensor.Sensors()
@@ -54,12 +55,23 @@ def dated_url_for(endpoint, **values):
 def override_url_for(): # url_for 오버라이딩
     return dict(url_for=dated_url_for)
 
-# Ctrl+C 핸들러 (카메라 리소스 해제)
-def handler(signal, frame):
-    print('CTRL-C pressed!')
+def ShutDown_SF():
+    # shutdown 플래그일때만 작동
+    while not shutdown_flag:
+        pass
+    
+    time.sleep(3)
+
     camera.close_cam()
     sf_machine.close()
-    sys.exit(0)
+    sig = getattr(signal, "SIGKILL", signal.SIGTERM)
+    os.kill(os.getpid(), sig)
+
+# Ctrl+C 핸들러 (카메라 리소스 해제)
+def handler(signal, frame):
+    print("[Server shutdown 요청]")
+    shutdown_flag = True
+    ShutDown_SF()
 
 # RealTime 출력을 위한 frame 생성 gen 함수
 def gen(camera):
@@ -72,44 +84,44 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+# 센서 DB 저장값으로 셋팅 초기화
+def Init_Sensor():
+    rec = sf_db.GetAllProperty()
+
+    idx = rec[0]
+    LED = rec[1]
+    w_level = rec[2]
+    l_level = rec[3]
+    s_level = rec[4]
+    pump = rec[5]
+    fan_in = rec[6]
+    fan_out = rec[7]
+    temp = rec[8]
+    humi = rec[9]
+
+    sf_machine.SetFanIn(fan_in)
+    sf_machine.SetFanOut(fan_out)
+    sf_machine.SetPump(pump)
+    sf_machine.SetLedLight(LED)
 
 # (데코레이터) AJAX 경로 (POST)
-@app.route("/ajax_to_py", methods=['post'])
-def ajax_to_py():
-    print("넘어옴, id : " + request.form['id'])
-    resp = app.response_class(
-        response=json.dumps({"result":"5678"}),
-        status=200,
-        mimetype='application/json'
-    )
-    print(resp)
-    return resp
+@app.route("/shutdown", methods=['post'])
+def shutdown():
+    global shutdown_flag
 
-@app.route("/Choco", methods=['post'])
-def Choco():
-    print("넘어옴, Name : " + request.form['Name'])
+    ip_address = request.remote_addr
+    print("[Client shutdown 요청, ip : " + ip_address + "]")
     resp = app.response_class(
-        response=json.dumps({"result":"Hancom"}),
+        response=json.dumps({"result":"10초 후 Smart Farm 서버가 종료됩니다."}),
         status=200,
         mimetype='application/json'
     )
-    print(resp)
+    shutdown_flag = True
     return resp
-# (데코레이터) AJAX 경로 
 
 # (데코레이터) '/getAllProperty'
 @app.route("/getAllProperty", methods=['post'])
 def get_AllProperty(): 
-    global idx
-    global LED 
-    global w_level 
-    global l_level 
-    global s_level 
-    global pump 
-    global fan_in 
-    global fan_out 
-    global temp 
-    global humi 
 
     print("getAllProperty 요청, id : " + request.form['id'])
     rec = sf_db.GetAllProperty()
@@ -271,9 +283,25 @@ def video_feed():
 if __name__ == "__main__":
     # 시그널 설정
     signal.signal(signal.SIGINT, handler)
+    
+    print("[센서 초기 설정 중...]")
+    Init_Sensor()
+    # 센서 초기화 시간
+    time.sleep(1)
+    print("[센서 설정 완료]")
+    
+    print("[스레드 초기 설정 중...]")
     check_level_t = threading.Thread(target=sf_machine.CheckLevel, args=(3,))
     check_level_t.start()
     temp_humi_t = threading.Thread(target=sf_machine.CheckTempHumi, args=(3,))
     temp_humi_t.start()
+    # 유저 종료 전용 스레드
+    SF_DOWN = threading.Thread(target=ShutDown_SF)
+    SF_DOWN.start()
+    # 스레드 초기화 시간
+    time.sleep(3.1)
+    print("[스레드 설정 완료]")
+    
+    print("[스마트팜 가동 시작]")
     app.run(host='0.0.0.0', port=8080, threaded=True)
 

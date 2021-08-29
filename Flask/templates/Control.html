@@ -11,6 +11,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}">
   </script>
   <script type="text/javascript" src="{{ url_for('static', filename = 'test.js') }}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 </head>
 <!-- Designing by CodingLab -->
 
@@ -105,22 +106,17 @@
         </div>
         <div class="Whole">
           <div>
-            <!-- Log -->
+            <!-- Log TextArea -->
             <div class="ControlPage">Log</div>
-            <textarea style="resize: both;" name="Log" id="" cols="60" rows="10" readonly>
-              1. 로그가 입력되는 화면입니다.
-              2. 로그가 입력되는 화면입니다.
-              3. 로그가 입력되는 화면입니다.
-            </textarea>
-
+            <textarea name="Log" id="log_area" cols="60" rows="10" readonly>################</textarea>
           </div>
-          <!-- Settings -->
+          <!-- Settings TextArea -->
             <div style="margin-left: 150px;">
               <div class="ControlPage">Chatting</div>
-              <textarea style="resize: both;" name="Chatting" id="" cols="60" rows="10" readonly></textarea>
+              <textarea name="Chatting" id="chat_area" cols="60" rows="10" readonly>################</textarea>
               <div>
-                  <input style="width: 414px;" type="text" id="test" placeholder="  메시지를 입력해주세요..">
-                  <button onclick="send()">전송</button>
+                  <input style="width: 414px;" type="text" id="send_text" placeholder="  메시지를 입력해주세요..">
+                  <button id="send_btn">전송</button>
               </div>
             </div>
         </div>

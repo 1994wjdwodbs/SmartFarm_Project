@@ -115,6 +115,28 @@ $(document).ready(function() {
     // SetInterval (주기적 값 갱신용)
     sensor_timer = setInterval(refresh_sensor, 3000);
     
+    // socketio chat
+    var socket_chat = io.connect("http://210.119.12.78:13640/chat")
+    socket_chat.on('message', function(msg){
+      $("#chat_area").val(msg.message + '\n' + $("#chat_area").val());
+    });
+    $('#send_text').keypress(function(e) {
+      if(e.keyCode == 13) {
+         socket_chat.emit('message', {'type' : 'normal', 'message' : $('#send_text').val()})
+         $('#send_text').val("");
+      }
+    });
+    $('#send_btn').click(function() {
+      socket_chat.emit('message', {'type' : 'normal', 'message' : $('#send_text').val()})
+      $('#send_text').val("");
+   });
+
+    // socketio log
+    var socket_log = io.connect("http://210.119.12.78:13640/log")
+    socket_log.on('logs', function(msg){
+      $("#log_area").val(msg.message + '\n' + $("#log_area").val());
+    });
+
     // 환풍기 1
     $('#switch2').change(function() {
       if ($("#switch2").is(":checked")){

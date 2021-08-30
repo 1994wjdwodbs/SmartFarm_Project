@@ -1,0 +1,18 @@
+ [(13:06:31) user2] Smart Farm Shutdown (Power-Off)
+ [(13:06:25) user1] Fan-Out : On
+ [(13:06:24) user1] Fan-In : On
+ [(13:06:24) user2] Fan-In : Off
+ [(13:06:23) user2] Fan-In : On
+ [(13:06:22) user2] Fan-Out : Off
+ [(13:06:22) user1] Fan-Out : Off
+ [(13:06:20) user2] Fan-Out : On
+ [(13:06:19) user2] Pump : Off
+ [(13:06:17) user2] Pump : On
+################
+ [(13:05:45) Server] Smart Farm 동작
+ [(13:05:45) Server] Smart Farm 스레드 설정 완료
+ [(13:05:42) Server] Smart Farm 스레드 설정 중...
+ [(13:05:42) Server] Smart Farm 센서 설정 완료
+ [(13:05:41) Server] Smart Farm 센서 설정 중...
+ [(13:05:41) Server] Smart Farm 시작 (Power-On)
+################

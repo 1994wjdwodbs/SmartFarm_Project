@@ -1,0 +1,76 @@
+ [(13:57:24) user2] Smart Farm Shutdown (Power-Off)
+ [(13:57:17) user2] Fan-Out : Off
+ [(13:57:13) user2] Fan-Out : On
+ [(13:57:12) user2] Fan-Out : Off
+ [(13:57:09) user2] Fan-Out : On
+ [(13:57:08) user2] Fan-In : Off
+ [(13:57:05) user2] Fan-In : On
+ [(13:57:03) user2] Fan-In : Off
+ [(13:57:01) user2] Pump : Off
+ [(13:56:52) user2] Pump : On
+ [(13:56:50) user2] Fan-In : On
+ [(13:56:42) user2] LED : 0 조절
+ [(13:56:42) user2] LED : 4 조절
+ [(13:56:41) user2] LED : 0 조절
+ [(13:56:40) user2] LED : 35 조절
+ [(13:56:40) user2] LED : 37 조절
+ [(13:56:40) user2] LED : 27 조절
+ [(13:56:40) user2] LED : 28 조절
+ [(13:56:39) user2] LED : 44 조절
+ [(13:56:31) user2] LED : 66 조절
+ [(13:56:31) user2] LED : 64 조절
+ [(13:56:31) user2] LED : 63 조절
+ [(13:56:31) user2] LED : 78 조절
+ [(13:56:30) user2] Pump : Off
+ [(13:56:24) user2] Pump : On
+ [(13:56:23) user2] Fan-In : Off
+ [(13:56:21) user2] Fan-Out : Off
+ [(13:55:23) user1] Pump : Off
+ [(13:55:14) user1] Pump : On
+ [(13:53:31) user1] LED : 100 조절
+ [(13:53:31) user1] LED : 97 조절
+ [(13:53:31) user1] LED : 92 조절
+ [(13:53:26) user1] LED : 87 조절
+ [(13:53:26) user1] LED : 100 조절
+ [(13:53:24) user1] Pump : Off
+ [(13:53:06) user1] Pump : On
+ [(13:52:51) user1] Fan-In : On
+ [(13:52:50) user1] Fan-Out : On
+ [(13:52:46) user1] LED : 75 조절
+ [(13:52:38) user1] LED : 2 조절
+ [(13:52:38) user1] LED : 3 조절
+ [(13:52:38) user1] LED : 6 조절
+ [(13:52:38) user1] LED : 10 조절
+ [(13:52:37) user1] LED : 13 조절
+ [(13:52:37) user1] LED : 11 조절
+ [(13:52:37) user1] LED : 17 조절
+ [(13:52:37) user1] LED : 16 조절
+ [(13:52:37) user1] LED : 20 조절
+ [(13:52:37) user1] LED : 28 조절
+ [(13:52:37) user1] LED : 24 조절
+ [(13:52:37) user1] LED : 19 조절
+ [(13:52:37) user1] LED : 31 조절
+ [(13:52:37) user1] LED : 44 조절
+ [(13:52:37) user1] LED : 35 조절
+ [(13:52:37) user1] LED : 40 조절
+ [(13:52:37) user1] LED : 38 조절
+ [(13:52:37) user1] LED : 47 조절
+ [(13:52:37) user1] LED : 52 조절
+ [(13:52:37) user1] LED : 51 조절
+ [(13:52:37) user1] LED : 53 조절
+ [(13:52:36) user1] LED : 58 조절
+ [(13:52:36) user1] LED : 64 조절
+ [(13:52:36) user1] LED : 61 조절
+ [(13:52:36) user1] LED : 65 조절
+ [(13:52:34) user1] Pump : Off
+ [(13:52:30) user1] Pump : On
+ [(13:52:28) user1] Fan-In : Off
+ [(13:52:26) user1] Fan-Out : Off
+################
+ [(13:52:09) Server] Smart Farm 동작
+ [(13:52:09) Server] Smart Farm 스레드 설정 완료
+ [(13:52:06) Server] Smart Farm 스레드 설정 중...
+ [(13:52:06) Server] Smart Farm 센서 설정 완료
+ [(13:52:05) Server] Smart Farm 센서 설정 중...
+ [(13:52:05) Server] Smart Farm 시작 (Power-On)
+################

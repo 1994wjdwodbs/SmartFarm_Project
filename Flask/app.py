@@ -34,14 +34,19 @@ import sf_sensor
 temp_humi_flag = True
 check_level_flag = True
 shutdown_flag = False
+shutdown_flag_2 = True
 
 # sf_sensor 클래스 인스턴스 객체 생성
 sf_machine = sf_sensor.Sensors()
 
+# 채팅, 로그용 리스트 변수
+chat_list = []
+log_list = []
+
 # 웹 서버, 소켓IO를 위한 Flask, SocketIO 객체 생성
 app = Flask(__name__)
 app.secret_key = "temp_key"
-socketio = SocketIO(app)
+# socketio = SocketIO(app)
 # RealTime 출력을 위한 Camera 객체 생성
 camera = Camera()
 
@@ -62,30 +67,44 @@ def override_url_for(): # url_for 오버라이딩
     return dict(url_for=dated_url_for)
 
 def ShutDown_SF():
+    global shutdown_flag
+    global shutdown_flag_2
+
     # shutdown 플래그일때만 작동
-    while not shutdown_flag:
+    while not shutdown_flag and shutdown_flag_2:
         pass
-    
+    print('셧다운 가동')
+    shutdown_flag_2 = False
+
     time.sleep(3)
 
     camera.close_cam()
     sf_machine.close()
+
+    # 로그 파일 작성
+    print('로그 파일 작성 중...')
+    f = open('log' + datetime.datetime.now().strftime('%y%m%d_%H%M%S') + '.txt', 'wt')
+    for i in log_list:
+        f.write(i + '\n')
+    f.close()
+    print('로그 파일 작성 완료')
+
     sig = getattr(signal, "SIGKILL", signal.SIGTERM)
     os.kill(os.getpid(), sig)
 
 # Ctrl+C 핸들러 (카메라 리소스 해제)
 def handler(signal, frame):
     global shutdown_flag
-    global socketio
+    # global socketio
 
     now = datetime.datetime.now().strftime('(%H:%M:%S)')
 
     print("[Server shutdown 요청]")
+    InputLog(f' [{now} Server] Smart Farm Shutdown (Power-Off)')
     # socketio 호출을 이용한 외부에서 socket emit
-    socketio.emit("logs", {'message' : f' [{now} Server] Smart Farm Shutdown 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
-            
+    # socketio.emit("logs", {'message' : f' [{now} Server] Smart Farm Shutdown 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+
     shutdown_flag = True
-    ShutDown_SF()
 
 # RealTime 출력을 위한 frame 생성 gen 함수
 def gen(camera):
@@ -118,38 +137,80 @@ def Init_Sensor():
     sf_machine.SetPump(pump)
     sf_machine.SetLedLight(LED)
 
-# app 리퀘스트 전 (요청 페이지에 대한 세션 설정)
-@app.before_request
-def before_request():
-    global user_num
-    # 이미 세션에 값이 지정되있으면 패스
-    if 'session' in session and 'user-id' in session:
-        pass
+# 채팅 입력 동시 접근 방지
+mutex_chat = threading.Lock()
+
+def InputChat(msg):
+    global chat_list
+    print('msg : ' + msg)
+    mutex_chat.acquire()
+    if len(chat_list) >= 10:
+        del chat_list[9]
+        chat_list.insert(0, msg)
     else:
-        session['session'] = os.urandom(24)
-        session['user-id'] = 'user' + str(user_num)
-        user_num += 1
+        chat_list.insert(0, msg)
+    mutex_chat.release()
+
+def OutputChat():
+    global chat_list
+    
+    str = ''
+    for i in chat_list:
+        str = str + i + '\n'
+        print('chat : ' + i)
+
+    return str
+
+# 로그 입력 동시 접근 방지
+mutex_log = threading.Lock()
+
+def InputLog(msg):
+    global log_list
+    print('log : ' + msg)
+    mutex_log.acquire()
+    log_list.insert(0, msg)
+    mutex_log.release()
+
+def OutputLog():
+    global log_list
+    
+    str = ''
+    for i in log_list:
+        str = str + i + '\n'
+        print('log : ' + i)
+
+    return str
+
+# 세션 아이디 부여 동시 접근 방지
+mutex_session = threading.Lock()
+
+# app 첫 리퀘스트 전 (요청 페이지에 대한 세션 설정)
+@app.before_first_request
+def before_first_request():
+    session.clear()
 
 # (데코레이터) AJAX 경로 (POST)
 @app.route("/shutdown", methods=['post'])
 def shutdown():
+    # global socketio
     global shutdown_flag
-    global socketio
 
     user_id = session['user-id']
     now = datetime.datetime.now().strftime('(%H:%M:%S)')
 
     ip_address = request.remote_addr
     print("[Client shutdown 요청, ip : " + ip_address + "]")
+    InputLog(f' [{now} {user_id}] Smart Farm Shutdown (Power-Off)')
     # socketio 호출을 이용한 외부에서 socket emit
-    socketio.emit("logs", {'message' : f' [{now} {user_id}] SmartFarm Shutdown 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
-            
+    # socketio.emit("logs", {'message' : f' [{now} {user_id}] SmartFarm Shutdown 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+    
+    shutdown_flag = True
+
     resp = app.response_class(
         response=json.dumps({"result":"10초 후 Smart Farm 서버가 종료됩니다."}),
         status=200,
         mimetype='application/json'
     )
-    shutdown_flag = True
     return resp
 
 # (데코레이터) '/getAllProperty'
@@ -182,7 +243,7 @@ def get_AllProperty():
 @app.route("/setProperty", methods=['post'])
 def setProperty(): 
     global sf_machine
-    global socketio
+    # global socketio
 
     user_id = session['user-id']
     now = datetime.datetime.now().strftime('(%H:%M:%S)')
@@ -190,27 +251,30 @@ def setProperty():
     
     if COMMAND == 'FAN_IN':
         print("FAN_IN")
+        
         if request.form['TURN'] == 'ON':
             sf_machine.SetFanIn(True)
             sf_db.SetProperty('fan_in', True)
+            InputLog(f' [{now} {user_id}] Fan-In : On')
             resp = app.response_class(
                 response=json.dumps({"FAN_IN":"ON"}),
                 status=200,
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             # socketio 호출을 이용한 외부에서 socket emit
-            socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-In : On 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+            # socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-In : On 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
             return resp
         else:
             sf_machine.SetFanIn(False)
             sf_db.SetProperty('fan_in', False)
+            InputLog(f' [{now} {user_id}] Fan-In : Off')
             resp = app.response_class(
                 response=json.dumps({"FAN_IN":"ON"}),
                 status=200,
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             # socketio 호출을 이용한 외부에서 socket emit
-            socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-In : Off 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+            # socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-In : Off 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
             return resp
 
     if COMMAND == 'FAN_OUT':
@@ -218,24 +282,26 @@ def setProperty():
         if request.form['TURN'] == 'ON':
             sf_machine.SetFanOut(True)
             sf_db.SetProperty('fan_out', True)
+            InputLog(f' [{now} {user_id}] Fan-Out : On')
             resp = app.response_class(
                 response=json.dumps({"FAN_OUT":"ON"}),
                 status=200,
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             # socketio 호출을 이용한 외부에서 socket emit
-            socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-Out : On 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+            # socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-Out : On 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
             return resp
         else:
             sf_machine.SetFanOut(False)
             sf_db.SetProperty('fan_out', False)
+            InputLog(f' [{now} {user_id}] Fan-Out : Off')
             resp = app.response_class(
                 response=json.dumps({"FAN_OUT":"ON"}),
                 status=200,
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             # socketio 호출을 이용한 외부에서 socket emit
-            socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-Out : Off 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+            # socketio.emit("logs", {'message' : f' [{now} {user_id}] Fan-Out : Off 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
             return resp
 
     if COMMAND == 'PUMP':
@@ -243,24 +309,26 @@ def setProperty():
         if request.form['TURN'] == 'ON':
             sf_machine.SetPump(True)
             sf_db.SetProperty('pump', True)
+            InputLog(f' [{now} {user_id}] Pump : On')
             resp = app.response_class(
                 response=json.dumps({"PUMP":"ON"}),
                 status=200,
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             # socketio 호출을 이용한 외부에서 socket emit
-            socketio.emit("logs", {'message' : f' [{now} {user_id}] Pump : On 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+            # socketio.emit("logs", {'message' : f' [{now} {user_id}] Pump : On 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
             return resp
         else:
             sf_machine.SetPump(False)
             sf_db.SetProperty('pump', False)
+            InputLog(f' [{now} {user_id}] Pump : Off')
             resp = app.response_class(
                 response=json.dumps({"PUMP":"ON"}),
                 status=200,
                 mimetype='application/json')
             resp.headers['Access-Control-Allow-Origin'] = '*'
             # socketio 호출을 이용한 외부에서 socket emit
-            socketio.emit("logs", {'message' : f' [{now} {user_id}] Pump : Off 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+            # socketio.emit("logs", {'message' : f' [{now} {user_id}] Pump : Off 명령', 'type' : 'cmd'}, namespace='/log', broadcast=True)
             return resp
 
     if COMMAND == 'LED':
@@ -268,13 +336,97 @@ def setProperty():
         
         sf_machine.SetLedLight(int(request.form['LED']))
         sf_db.SetProperty('led', int(request.form['LED']))
+        InputLog(f' [{now} {user_id}] LED : ' + request.form['LED'] + ' 조절')
         resp = app.response_class(
             response=json.dumps({"LED":request.form['LED']}),
             status=200,
             mimetype='application/json')
         resp.headers['Access-Control-Allow-Origin'] = '*'
         # socketio 호출을 이용한 외부에서 socket emit
-        socketio.emit("logs", {'message' : f' [{now} {user_id}] LED : ' + request.form['LED'] + ' 조절', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+        # socketio.emit("logs", {'message' : f' [{now} {user_id}] LED : ' + request.form['LED'] + ' 조절', 'type' : 'cmd'}, namespace='/log', broadcast=True)
+        return resp
+
+# (데코레이터) '/chat'
+@app.route("/chat", methods=['post'])
+def chats(): 
+    global sf_machine
+    global clients
+    # global socketio
+
+    user_id = session['user-id']
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    COMMAND = request.form['COMMAND']
+    
+    if COMMAND == 'IN':
+        print("[CHAT IN]")
+
+        mutex2.acquire()
+        clients += 1
+        mutex2.release()
+
+        InputChat(f' {now} {user_id}가 입장하였습니다. [전체 {clients}명 접속 중]')
+        resp = app.response_class(
+            response=json.dumps({"messages":OutputChat()}),
+            status=200,
+            mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
+        
+    if COMMAND == 'SEND':
+        print("[CHAT SEND]")
+        
+        InputChat(' ' + now + ' ' + user_id + ' : ' + request.form['MSG'])
+        resp = app.response_class(
+            response=json.dumps({"messages":OutputChat()}),
+            status=200,
+            mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
+
+    if COMMAND == 'RECV':
+        print("[CHAT RECV]")
+        
+        resp = app.response_class(
+            response=json.dumps({"messages":OutputChat()}),
+            status=200,
+            mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
+
+    if COMMAND == 'OUT':
+        print("[CHAT OUT]")
+
+        mutex2.acquire()
+        clients -= 1
+        mutex2.release()
+
+        InputChat(f' {now} {user_id}가 퇴장하였습니다. [전체 {clients}명 접속 중]')
+        resp = app.response_class(
+            response=json.dumps({"MSG":OutputChat()}),
+            status=200,
+            mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        return resp
+
+# (데코레이터) '/chat'
+@app.route("/log", methods=['post'])
+def logs(): 
+    global sf_machine
+    global clients
+    # global socketio
+
+    user_id = session['user-id']
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    COMMAND = request.form['COMMAND']
+
+    if COMMAND == 'RECV':
+        print("[LOG RECV]")
+        
+        resp = app.response_class(
+            response=json.dumps({"messages":OutputLog()}),
+            status=200,
+            mimetype='application/json')
+        resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp
 
 # (데코레이터) '/address' 경로
@@ -316,6 +468,25 @@ def user_setting():
 
 @app.route("/control")
 def control():
+    global user_num
+    global clients
+
+    if not ('session' in session and 'user-id' in session):
+        mutex_session.acquire()
+        session['session'] = os.urandom(24)
+        session['user-id'] = 'user' + str(user_num)
+        user_num += 1
+        mutex_session.release()
+
+    user_id = session['user-id']
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+
+    mutex2.acquire()
+    clients += 1
+    mutex2.release()
+
+    InputChat(f' {now} {user_id}가 입장하였습니다. [전체 {clients}명 접속 중]')
+
     ip_address = request.remote_addr
     print("<requester IP : " + ip_address + " >")
     print("<Control.html 접근>")
@@ -333,77 +504,102 @@ def video_feed():
 user_num = 1
 clients = 0 # 전체 접속자 수
 
+mutex2 = threading.Lock()
+
 # socket_io 채팅 영역
-@socketio.on('connect', namespace='/chat')
-def connect():
-    print('[socket:/chat 첫 접속]')
-    global clients
-    clients += 1
-    user_id = session['user-id']
-    now = datetime.datetime.now().strftime('(%H:%M:%S)')
-    emit("message", {'message' : f' {now} {user_id}가 입장하였습니다. [전체 {clients}명 접속 중]', 'type' : 'in'}, broadcast=True)
-@socketio.on('disconnect', namespace='/chat')
-def disconnect():
-    print('[socket:/chat 접속 해제]')
-    global clients
-    clients -= 1
-    user_id = session['user-id']
-    now = datetime.datetime.now().strftime('(%H:%M:%S)')
-    emit("message", {'message' : f' {now} {user_id}가 퇴장하였습니다. [전체 {clients}명 접속 중]', 'type' : 'out'}, broadcast=True)
-    session.clear() # 세션 초기화
-@socketio.on("message", namespace='/chat')
-def request_chat(User):
-    print("[recv] message from " + session['user-id'] + " : " + User['message'])
-    to_client = dict()
-    user_id = session['user-id']
-    now = datetime.datetime.now().strftime('(%H:%M:%S)')
-    to_client['message'] = ' ' + now + ' ' + user_id + ' : ' + User['message']
-    to_client['type'] = 'cmd'
-    # emit("response", {'data': message['data'], 'username': session['username']}, broadcast=True)
-    send(to_client, broadcast=True)
+# @socketio.on('connect', namespace='/chat')
+# def connect():
+#     print('[socket:/chat 첫 접속]')
+#     global clients
+
+#     mutex2.acquire()
+#     clients += 1
+#     mutex2.release()
+    
+#     user_id = session['user-id']
+#     now = datetime.datetime.now().strftime('(%H:%M:%S)')
+#     emit("message", {'message' : f' {now} {user_id}가 입장하였습니다. [전체 {clients}명 접속 중]', 'type' : 'chat'}, broadcast=True)
+# @socketio.on('disconnect', namespace='/chat')
+# def disconnect():
+#     print('[socket:/chat 접속 해제]')
+#     global clients
+
+#     mutex2.acquire()
+#     clients -= 1
+#     mutex2.release()
+    
+#     user_id = session['user-id']
+#     now = datetime.datetime.now().strftime('(%H:%M:%S)')
+#     emit("message", {'message' : f' {now} {user_id}가 퇴장하였습니다. [전체 {clients}명 접속 중]', 'type' : 'chat'}, broadcast=True)
+#     session.clear() # 세션 초기화
+# @socketio.on("message", namespace='/chat')
+# def request_chat(User):
+#     print("[recv] message from " + session['user-id'] + " : " + User['message'])
+#     to_client = dict()
+#     user_id = session['user-id']
+#     now = datetime.datetime.now().strftime('(%H:%M:%S)')
+#     to_client['message'] = ' ' + now + ' ' + user_id + ' : ' + User['message']
+#     to_client['type'] = 'chat'
+#     # emit("response", {'data': message['data'], 'username': session['username']}, broadcast=True)
+#     send(to_client, broadcast=True)
 
 # socket_io 로그 영역
-@socketio.on('connect', namespace='/log')
-def connect():
-    pass
-@socketio.on('disconnect', namespace='/log')
-def disconnect():
-    pass
-@socketio.on("logs", namespace='/log')
-def request_log(SF_Mach):
-    global clients
-    print("[recv] message from " + session['user-id'] + " : " + SF_Mach['message'])
-    to_client = dict()
-    user_id = session['user-id']
-    now = datetime.datetime.now().strftime('(%H:%M:%S)')
-    to_client['message'] = ' ' + now + ' ' + user_id + ' : ' + SF_Mach['message']
-    to_client['type'] = 'cmd'
-    # emit("response", {'data': message['data'], 'username': session['username']}, broadcast=True)
-    send(to_client, broadcast=True)
+# @socketio.on('connect', namespace='/log')
+# def connect():
+#     pass
+# @socketio.on('disconnect', namespace='/log')
+# def disconnect():
+#     pass
+# @socketio.on("logs", namespace='/log')
+# def request_log(SF_Mach):
+#     global clients
+#     print("[recv] message from " + session['user-id'] + " : " + SF_Mach['message'])
+#     to_client = dict()
+#     user_id = session['user-id']
+#     now = datetime.datetime.now().strftime('(%H:%M:%S)')
+#     to_client['message'] = ' ' + now + ' ' + user_id + ' : ' + SF_Mach['message']
+#     to_client['type'] = 'cmd'
+#     # emit("response", {'data': message['data'], 'username': session['username']}, broadcast=True)
+#     send(to_client, broadcast=True)
 
 if __name__ == "__main__":
+
+    InputLog('################')
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    InputLog(f' [{now} Server] Smart Farm 시작 (Power-On)')
+
     # 시그널 설정
     signal.signal(signal.SIGINT, handler)
     
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    InputLog(f' [{now} Server] Smart Farm 센서 설정 중...')
     print("[센서 초기 설정 중...]")
     Init_Sensor()
     # 센서 초기화 시간
     time.sleep(1)
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    InputLog(f' [{now} Server] Smart Farm 센서 설정 완료')
     print("[센서 설정 완료]")
-    
+
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    InputLog(f' [{now} Server] Smart Farm 스레드 설정 중...')
     print("[스레드 초기 설정 중...]")
     check_level_t = threading.Thread(target=sf_machine.CheckLevel, args=(3,))
     check_level_t.start()
     temp_humi_t = threading.Thread(target=sf_machine.CheckTempHumi, args=(3,))
     temp_humi_t.start()
-    # 유저 종료 전용 스레드
-    SF_DOWN = threading.Thread(target=ShutDown_SF)
-    SF_DOWN.start()
+    shutdown_t = threading.Thread(target=ShutDown_SF)
+    shutdown_t.start()
     # 스레드 초기화 시간
     time.sleep(3.1)
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    InputLog(f' [{now} Server] Smart Farm 스레드 설정 완료')
     print("[스레드 설정 완료]")
-    
+
+    now = datetime.datetime.now().strftime('(%H:%M:%S)')
+    InputLog(f' [{now} Server] Smart Farm 동작')
     print("[스마트팜 가동 시작]")
-    socketio.run(app, host='0.0.0.0', port=8080)
-    # app.run(host='0.0.0.0', port=8080, threaded=True)
+    InputLog('################')
+    # socketio.run(app, host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080, threaded=True)
 

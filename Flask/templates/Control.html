@@ -10,7 +10,7 @@
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}">
   </script>
-  <script type="text/javascript" src="{{ url_for('static', filename = 'test.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename = 'smartfarm.js') }}"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 </head>
 <!-- Designing by CodingLab -->
@@ -21,15 +21,15 @@
   <div class="main_div">
     <div class="button">
       <a style="cursor: pointer;" id="refresh_sf"> 
-        <i style="font-size:24px; margin: 10px 30px 0 0 ;" class="fa">&#xf021;</i>
+        <img src="/static/images/refresh.png" style="margin-right: 8px;" alt="">
       </a>
-      <a href="/login">Logout</a>
+      <a href="/login"> 로그아웃</a>
     </div>
     <div class="button">
       <a style="cursor: pointer;" id="PowerOff"> 
-        <i style="font-size:24px; margin: 10px 13px 0 0 ;" class="fas fa-power-off">&nbsp;</i>
+        <img src="/static/images/power.png" style="margin-right: 8px;" alt="">
       </a>
-      <a href='javascript:void(0);' onclick="SF_ShutDown();">PowerOff</a>
+      <a href='javascript:void(0);' onclick="SF_ShutDown();">전원 종료</a>
     </div>
     <br>
     <div>

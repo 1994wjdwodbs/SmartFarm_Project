@@ -1,4 +1,5 @@
-var sensor_timer;
+// 센서/채팅/로그용 interval 변수
+var sensors;
 
 // 센서별 수치 리프레시 함수
 function refresh_sensor() {
@@ -31,15 +32,15 @@ function refresh_sensor() {
 
 // 스마트팜 Server, Machine 종료 요청 함수
 function SF_ShutDown() {
-   clearInterval(sensor_timer);
+   clearInterval(sensors);
    $.ajax({
       type:'POST',
       dataType:'JSON',
       url:'shutdown',
       data:{},
       success : function(data) {
-         alert(data["result"]);
-        },
+         alert(data.result);
+      },
       error : function(e) {
          alert('Shutdown Error!');
          return false;
@@ -109,33 +110,118 @@ function Set_Led(arg_val) {
     });
 }
 
+// 채팅에서 나갈 때
+function chat_out() {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'chat',
+      data:{"COMMAND" : "OUT"},
+      success : function(data) {
+         $("#chat_area").val(data.messages);
+        },
+      error : function(e) {
+         alert('Chat Error!');
+         return false;
+      }
+    });
+}
+// 채팅 send() 함수
+function chat_send() {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'chat',
+      data:{"COMMAND" : "SEND", "MSG" : $("#send_text").val()},
+      success : function(data) {
+         $("#chat_area").val(data.messages);
+        },
+      error : function(e) {
+         alert('Chat Error!');
+         return false;
+      }
+   });
+}
+// 채팅 recv() 함수
+function chat_recv() {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'chat',
+      data:{"COMMAND" : "RECV"},
+      success : function(data) {
+         $("#chat_area").val("");
+         $("#chat_area").val(data.messages);
+        },
+      error : function(e) {
+         alert('Chat Error!');
+         return false;
+      }
+   });
+}
+
+// 로그 recv() 함수
+function log_recv() {
+   $.ajax({
+      type:'POST',
+      dataType:'JSON',
+      url:'log',
+      data:{"COMMAND" : "RECV"},
+      success : function(data) {
+         $("#log_area").val("");
+         $("#log_area").val(data.messages);
+         if(String(data.messages).indexOf("Power-Off") != -1) {
+            clearInterval(sensors);
+         }
+        },
+      error : function(e) {
+         alert('Chat Error!');
+         return false;
+      }
+   });
+}
+
 // 페이지 로드시 자동 실행하는 함수
 $(document).ready(function() {
     refresh_sensor();
+    chat_recv();
     // SetInterval (주기적 값 갱신용)
-    sensor_timer = setInterval(refresh_sensor, 3000);
+    sensors = setInterval(function(){
+       refresh_sensor();
+       chat_recv();
+       log_recv();
+    }, 2000);
     
-    // socketio chat
-    var socket_chat = io.connect("http://210.119.12.78:13640/chat")
-    socket_chat.on('message', function(msg){
-      $("#chat_area").val(msg.message + '\n' + $("#chat_area").val());
+    $(window).on("beforeunload", function(){
+      chat_out();
     });
+
+    // socketio chat
+   //  var socket_chat = io.connect("http://210.119.12.78:13640/chat")
+   //  socket_chat.on('message', function(msg){
+   //    $("#chat_area").val(msg.message + '\n' + $("#chat_area").val());
+   //  });
+   //  socket_chat.on('logs', function(msg){
+   //    $("#log_area").val(msg.message + '\n' + $("#log_area").val());
+   //  });
     $('#send_text').keypress(function(e) {
       if(e.keyCode == 13) {
-         socket_chat.emit('message', {'type' : 'normal', 'message' : $('#send_text').val()})
+         // socket_chat.emit('message', {'type' : 'normal', 'message' : $('#send_text').val()})
+         chat_send();
          $('#send_text').val("");
       }
     });
     $('#send_btn').click(function() {
-      socket_chat.emit('message', {'type' : 'normal', 'message' : $('#send_text').val()})
+      // socket_chat.emit('message', {'type' : 'normal', 'message' : $('#send_text').val()})
+      chat_send();
       $('#send_text').val("");
    });
 
     // socketio log
-    var socket_log = io.connect("http://210.119.12.78:13640/log")
-    socket_log.on('logs', function(msg){
-      $("#log_area").val(msg.message + '\n' + $("#log_area").val());
-    });
+    // var socket_log = io.connect("http://210.119.12.78:13640/log")
+    // socket_log.on('logs', function(msg){
+    //   $("#log_area").val(msg.message + '\n' + $("#log_area").val());
+    // });
 
     // 환풍기 1
     $('#switch2').change(function() {

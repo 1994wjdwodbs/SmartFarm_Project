@@ -1,0 +1,9 @@
+ [(12:55:08) user2] Smart Farm Shutdown (Power-Off)
+################
+ [(12:54:49) Server] Smart Farm 동작
+ [(12:54:49) Server] Smart Farm 스레드 설정 완료
+ [(12:54:46) Server] Smart Farm 스레드 설정 중...
+ [(12:54:46) Server] Smart Farm 센서 설정 완료
+ [(12:54:45) Server] Smart Farm 센서 설정 중...
+ [(12:54:45) Server] Smart Farm 시작 (Power-On)
+################

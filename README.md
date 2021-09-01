@@ -248,7 +248,7 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 - 실시간 채팅 및 로그 전달 테스트<br/>
 
 <p align="center">
-    <imgsrc="PortFolio/images/smartfarm_실기동작_02.webp" ><br/>
+    <img src="PortFolio/images/smartfarm_실기동작_02.webp" ><br/>
     <span><b>Smart Farm 작동 확인</b></span>
 </p> 
 

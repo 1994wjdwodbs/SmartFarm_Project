@@ -239,5 +239,17 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 </p> 
 
 - 파이썬 코드 (Websocket 서버 부분) 작성<br/>
+
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/smartfarm_ui_02.JPG" ><br/>
+    <span><b>채팅 및 로그 확인</b></span>
+</p> 
+
 - 실시간 채팅 및 로그 전달 테스트<br/>
+
+<p align="center">
+    <imgsrc="PortFolio/images/smartfarm_실기동작_02.webp" ><br/>
+    <span><b>Python Socket-IO 코드</b></span>
+</p> 
+
 - Smart Farm 최종 작동 확인<br/>

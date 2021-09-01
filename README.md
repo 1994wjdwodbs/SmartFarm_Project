@@ -202,15 +202,15 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 ### 21.08.13 (금)
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_1.jpg" ><br/>
-    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_2.jpg" ><br/>
-    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_1.jpg" >
+    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_2.jpg" >
+    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" >
     <span><b>Smart Farm 모듈 및 센서 최종 배치 완료</b></span>
 </p> 
 
 - Smart Farm 최종 배치 작업<br/>
 - (DEMO) 전체 동작 점검 및 확인<br/>
-- 
+
 #### Issue
 > -  워터 펌프 및 LCD 모니터 충돌 문제 (전압) 발생 __(Solved)__ <br/>
 > - 센서 측정 값 비일관적, 해결 방법 모색 __(Solved)__ <br/>
@@ -222,7 +222,7 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 - Ajax 코드 (일정 주기(3초) 마다 측정 값/센서 리프레시) 작성
 - JS 코드 (WebSocket 클라이언트 부분) 작성
 
-## 21.08.15 (일)
+### 21.08.15 (일)
 
 - 파이썬 코드 (Websocket 서버 부분) 작성<br/>
 - 실시간 채팅 및 로그 전달 테스트<br/>

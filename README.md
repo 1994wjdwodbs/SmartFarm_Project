@@ -3,22 +3,25 @@
 실내, 홈 가드닝을 위한 Smart Farm Project 입니다.
 
 > __Smart Farm 기능__ <br/>
->> 1. 조도에 따른 LED센서 ON/OFF <br/>
->> 2. LED센서 밝기 단계별 조절 기능(UI) <br/>
->> 3. 현재 대기 온도에 따른 FAN ON/OFF <br/>
->> 4. 토양 습도 값에 따른 Water Pump ON/OFF <br/>
->> 5. 온습도 센서 측정 값 Smart Farm Kit LCD에 출력 <br/>
->> 6. 수위 센서를 통한 수통 잔여 물 양 확인(UI) <br/>
->> 7. 카메라 모듈로 실시간 식물 상태 확인 기능(UI) <br/>
->> 8. FAN, LED, Water Pump, 토양 습도 센서 수동 조작(UI) <br/>
+>> 1. 회원 가입 및 로그인 (검증, 확인, 유효성 검사) <br/>
+>> 2. 카메라 모듈로 식물 상태 확인 (실시간 스트리밍) <br/>
+>> 3. LED 센서 밝기 단계별 조절 (UI) <br/>
+>> 4. 온습도 측정 (XX.X°C , XX.X%) 및 Smart Farm Kit LCD 출력<br/>
+>> 5. FAN-IN, FAN-OUT 팬 모듈 ON/OFF<br/>
+>> 6. 수위 센서를 통한 수통 잔여 청수량 (%) 확인 <br/>
+>> 7. 토양 수분 센서를 통한 토양 습도 측정 (%) <br/>
+>> 8. 조도 센서를 통한 밝기 측정 (lx) <br/>
+>> 9. 실시간 채팅 및 센서 작동 로그 출력 (날짜별 log.txt 작성됨) <br/>
+>> 10. Log-out, Refresh, Shutdown 기능 제공 <br/>
+
 
 ## Smart Farm Project Members (5명)
 
-__- 강동훈__ <br/>
-__- 정재윤__ <br/>
-__- 하진우__ <br/>
-__- 편상현__ <br/>
-__- 조희지__ <br/>
+__- 강동훈 😊__ <br/>
+__- 정재윤 😃__ <br/>
+__- 하진우 😏__ <br/>
+__- 편상현 😁__ <br/>
+__- 조희지 😆__ <br/>
 
 ## 진척상황
 

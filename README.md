@@ -18,7 +18,7 @@
 ## Smart Farm Project Members (5명)
 
 __- 강동훈 😊__ <br/>
-__- [정재윤](https://github.com/1994wjdwodbs) 😃__ <br/>
+__- 😃 정재윤 (https://github.com/1994wjdwodbs)__ <br/>
 __- 하진우 😏__ <br/>
 __- 편상현 😁__ <br/>
 __- 조희지 😆__ <br/>

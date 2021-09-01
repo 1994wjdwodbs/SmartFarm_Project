@@ -219,8 +219,13 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 
 ### 21.08.14 (토)
 
+<p align="center">
+    <img src="PortFolio/images/smartfarm_socket코드_클라.JPG" >
+    <span><b>Smart Farm Ajax 및 Socket.io 코드 부분</b></span>
+</p> 
+
 - Ajax 코드 (일정 주기(3초) 마다 측정 값/센서 리프레시) 작성<br/>
-- JS 코드 (WebSocket 클라이언트 부분) 작성<br/>
+- JS 코드 (Web-Socket 클라이언트 부분) 작성<br/>
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/smartfarm_윗면.JPG" ><br/>
@@ -235,10 +240,10 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/smartfarm_socket코드.JPG" ><br/>
-    <span><b>Python Socket-IO 코드</b></span>
+    <span><b>Python Socket.io 코드</b></span>
 </p> 
 
-- 파이썬 코드 (Websocket 서버 부분) 작성<br/>
+- 파이썬 코드 (Web-socket 서버 부분) 작성<br/>
 
 <p align="center">
     <img width="60%" height="60%" src="PortFolio/images/smartfarm_ui_02.png" ><br/>

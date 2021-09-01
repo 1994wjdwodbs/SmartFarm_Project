@@ -204,7 +204,7 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 <p align="center">
     <img width="33%" height="60%" src="PortFolio/images/최종_배치도_1.jpg" >
     <img width="33%" height="60%" src="PortFolio/images/최종_배치도_2.jpg" >
-    <img width="33%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" >
+    <img width="33%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" ><br/>
     <span><b>Smart Farm 모듈 및 센서 최종 배치 완료</b></span>
 </p> 
 
@@ -223,7 +223,7 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 - JS 코드 (WebSocket 클라이언트 부분) 작성<br/>
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/smartfarm_윗면." ><br/>
+    <img width="60%" height="60%" src="PortFolio/images/smartfarm_윗면.JPG" ><br/>
     <span><b>Smart Farm 최종 외관</b></span>
 </p> 
 
@@ -232,6 +232,11 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 ---
 
 ### 21.08.15 (일)
+
+<p align="center">
+    <img width="60%" height="60%" src="PortFolio/images/smartfarm_socket코드.JPG" ><br/>
+    <span><b>Python Socket-IO 코드</b></span>
+</p> 
 
 - 파이썬 코드 (Websocket 서버 부분) 작성<br/>
 - 실시간 채팅 및 로그 전달 테스트<br/>

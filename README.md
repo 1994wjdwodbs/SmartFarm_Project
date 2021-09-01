@@ -202,9 +202,9 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 ### 21.08.13 (금)
 
 <p align="center">
-    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_1.jpg" >
-    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_2.jpg" >
-    <img width="60%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" >
+    <img width="33%" height="60%" src="PortFolio/images/최종_배치도_1.jpg" >
+    <img width="33%" height="60%" src="PortFolio/images/최종_배치도_2.jpg" >
+    <img width="33%" height="60%" src="PortFolio/images/최종_배치도_3.jpg" >
     <span><b>Smart Farm 모듈 및 센서 최종 배치 완료</b></span>
 </p> 
 

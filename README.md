@@ -228,10 +228,10 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 - JS 코드 (Web-Socket 클라이언트 부분) 작성<br/>
 
 <p align="center">
-    <img width="25%" height="60%" src="PortFolio/images/smartfarm_윗면.JPG" >
-    <img width="25%" height="60%" src="PortFolio/images/smartfarm_정면.JPG" >
-    <img width="25%" height="60%" src="PortFolio/images/smartfarm_옆면_01.JPG" >
-    <img width="25%" height="60%" src="PortFolio/images/smartfarm_옆면_02.JPG" ><br/>
+    <img width="24%" height="60%" src="PortFolio/images/smartfarm_윗면.JPG">
+    <img width="24%" height="60%" src="PortFolio/images/smartfarm_정면.JPG">
+    <img width="24%" height="60%" src="PortFolio/images/smartfarm_옆면_01.JPG">
+    <img width="24%" height="60%" src="PortFolio/images/smartfarm_옆면_02.JPG"><br/>
     <span><b>Smart Farm 최종 외관</b></span>
 </p> 
 

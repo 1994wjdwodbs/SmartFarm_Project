@@ -220,7 +220,7 @@ __- 조희지 😆 (https://github.com/zizi0308)__ <br/>
 ### 21.08.14 (토)
 
 <p align="center">
-    <img src="PortFolio/images/smartfarm_socket코드_클라.JPG"><
+    <img src="PortFolio/images/smartfarm_socket코드_클라.JPG"><br/>
     <span><b>Smart Farm Ajax 및 Socket.io 코드 부분</b></span>
 </p> 
 
